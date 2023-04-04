@@ -18,7 +18,9 @@ import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth"
 
 
@@ -30,16 +32,16 @@ const FBauth = getAuth(FBapp)
 
 
 export default function App() {
-  const [auth,setAuth] = useState()
+  const [auth, setAuth] = useState()
   // const [ errorMsg, setErrorMsg ] = useState()
 
-  onAuthStateChanged( FBauth, (user) => {
-    if( user ) {
-      setAuth( user )
-      console.log( user.uid )
+  onAuthStateChanged(FBauth, (user) => {
+    if (user) {
+      setAuth(user)
+      console.log(user.uid)
     }
     else {
-      setAuth( null )
+      setAuth(null)
     }
   })
 
@@ -49,19 +51,19 @@ export default function App() {
       .catch((error) => console.log(error))
   }
 
-  // const SignIn = ( email, password ) => {
-  //   signInWithEmailAndPassword( FBauth, email, password )
-  //   .then( (userCredential) => console.log(userCredential) )
-  //   .catch( (error) => console.log(error) )
-  // }
+  const SignIn = (email, password) => {
+    signInWithEmailAndPassword(FBauth, email, password)
+      .then((userCredential) => console.log(userCredential))
+      .catch((error) => console.log(error))
+  }
 
-  // const SignOut = () => {
-  //   signOut(FBauth)
-  //   .then( () => {
-  //     //now the user is signed out
-  //   })
-  //   .catch((err) => console.log(error) )
-  // }
+  const SignOut = () => {
+    signOut(FBauth)
+      .then(() => {
+        //now the user is signed out
+      })
+      .catch((err) => console.log(error))
+  }
 
 
   // const GetData = () => {
@@ -80,12 +82,28 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name='Login' options={{ headerShown: false }} component={LoginScreen} />
-        <Stack.Screen name='Sign Up' options={{ headerShown: false }}>
-          { (props) => <SignupScreen {...props} handler={SignUp} authStatus={auth} /> }
+        <Stack.Screen
+          name='Login'
+          options={{ headerShown: true }}
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name='Sign Up'
+          options={{ headerShown: false }}
+        >
+          {(props) => <SignupScreen {...props} handler={SignUp} authStatus={auth} />}
         </Stack.Screen>
-        <Stack.Screen name='Sign In' options={{ headerShown: false }} component={SigninScreen} />
-        <Stack.Screen name='Tabs' options={{ headerShown: false }} component={Tabs} />
+        <Stack.Screen
+          name='Sign In'
+          options={{ headerShown: false }}>
+          {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} signOutHandler={SignOut} />}
+        </Stack.Screen>
+        <Stack.Screen
+          name='Tabs'
+          options={{ headerShown: true }}>
+          {(props) => <Tabs {...props} authStatus={auth} />}
+        </Stack.Screen>
+
       </Stack.Navigator>
     </NavigationContainer>
 

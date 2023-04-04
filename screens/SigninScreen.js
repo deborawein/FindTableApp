@@ -41,6 +41,11 @@ export function SigninScreen(props) {
         }
     })
 
+    useEffect(() => {
+        if (props.authStatus) {
+            navigation.navigate('Tabs')
+        }
+    }, [props.authStatus])
 
 
     return (
@@ -71,7 +76,7 @@ export function SigninScreen(props) {
                 <TouchableOpacity
                     style={(validForm) ? styles.button : styles.buttonDisabled}
                     disabled={(validForm) ? false : true}
-                    onPress={() => navigation.navigate('Tabs')}
+                    onPress={() => props.handler(email, password)}
                 >
                     <Text style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
