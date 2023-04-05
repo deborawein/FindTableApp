@@ -61,7 +61,7 @@ export function Tabs(props) {
   })
 
   //Add data do Firebase
-  const addData = async () => {
+  const AddData = async () => {
     const userId = auth.uid 
     const path = `users/${userId}/table`
     const data = {
@@ -70,6 +70,8 @@ export function Tabs(props) {
     const ref = await addDoc( collection(FBdb, path), data)
   }
 
+ 
+
   return (
 
     <Tab.Navigator id='RootNavigator'>
@@ -77,7 +79,7 @@ export function Tabs(props) {
         name='Find Table'
         options={{ headerShown: false }}
       >
-        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={addData}/>}
+        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={AddData}/>}
       </Tab.Screen>
       <Tab.Screen name='Bookings' options={{ headerShown: false }} component={BookingsScreen} />
     </Tab.Navigator>
