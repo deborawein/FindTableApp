@@ -4,14 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
-
-
 //screens
 import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
 import { SignupScreen } from './screens/SignupScreen';
 import { Tabs } from './components/Tabs';
-
 //Firebase
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app'
@@ -22,15 +19,10 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth"
 
-
-
-
 const Stack = createNativeStackNavigator();
 
 const FBapp = initializeApp(firebaseConfig)
 const FBauth = getAuth(FBapp)
-
-
 
 export default function App() {
   const [auth, setAuth] = useState()
@@ -58,33 +50,6 @@ export default function App() {
       .catch((error) => console.log(error))
   }
 
-  // const SignOut = () => {
-  //   signOut(FBauth)
-  //     .then(() => {
-  //       //now the user is signed out
-  //     })
-  //     .catch((error) => console.log(error))
-  // }
-
-
-  // const AddData = async() => {
-  //   const path = 'restaurant/'
-  //   const data = new Date.getTime()
-  //   const ref = await addDoc (collection(FBdb, path), data)
-  // }
-  // const GetData = () => {
-  //   const userId = auth.uid
-  //   const path = `users/${userId}/notes`
-  //   const dataQuery = query( collection( FBdb, path ) )
-  //   const unsubscribe = onSnapshot( dataQuery, ( responseData ) => {
-  //     let notes = []
-  //     responseData.forEach( (note) => {
-  //       notes.push( note.data() )
-  //     })
-  //     console.log( notes )
-  //   })
-  // }
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
@@ -109,11 +74,9 @@ export default function App() {
           options={{ headerShown: false }}>
           {(props) => <Tabs {...props} authStatus={auth}
           //  add={AddData} 
-           />}
+          />}
         </Stack.Screen>
-
       </Stack.Navigator>
     </NavigationContainer>
-
   )
 }

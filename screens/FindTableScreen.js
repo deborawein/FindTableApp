@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+//Components
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
-
 
 export function FindTableScreen(props) {
 
     const navigation = useNavigation();
 
-  
     return (
         <View>
             <Header />
@@ -16,11 +15,11 @@ export function FindTableScreen(props) {
             <TouchableOpacity style={styles.button} onPress={() => props.signOutHandler()}>
                 <Text style={styles.buttonText}>Sign out</Text>
             </TouchableOpacity>
-            </View>
+        </View>
     )
-  }
+}
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFA3AC',
     },

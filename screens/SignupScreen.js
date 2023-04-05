@@ -1,5 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from 'react'
+//React Navigation
 import { useNavigation } from "@react-navigation/native";
 
 const logo = require('../assets/logo.png');

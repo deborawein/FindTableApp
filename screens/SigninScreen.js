@@ -1,5 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from 'react'
+//React Navigation
 import { useNavigation } from "@react-navigation/native";
 
 const logo = require('../assets/logo.png');
@@ -46,7 +47,6 @@ export function SigninScreen(props) {
             navigation.navigate('Tabs')
         }
     }, [props.authStatus])
-
 
     return (
         <View style={styles.page}>
@@ -176,8 +176,5 @@ const styles = StyleSheet.create({
         height: 20,
         marginTop: 25,
         marginEnd: 10,
-
-
     }
-
 })
