@@ -12,6 +12,9 @@ export function FindTableScreen(props) {
         <View>
             <Header />
             <Search />
+            <TouchableOpacity style={styles.button} onPress={() => props.addData()}>
+                <Text style={styles.buttonText}>Add some data</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => props.signOutHandler()}>
                 <Text style={styles.buttonText}>Sign out</Text>
             </TouchableOpacity>

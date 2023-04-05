@@ -13,11 +13,20 @@ import {
   getAuth,
   signOut
 } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  addDoc,
+  collection
+} from 'firebase/firestore';
+import { async } from "@firebase/util";
 
 const Tab = createBottomTabNavigator();
 
 const FBapp = initializeApp(firebaseConfig)
 const FBauth = getAuth(FBapp)
+const FBdb = getFirestore(FBapp)
 
 export function Tabs(props) {
 
@@ -37,6 +46,17 @@ export function Tabs(props) {
       .catch((error) => console.log(error))
   }
 
+  const addData = async () => { 
+    const path = 'restaurants'
+    const date = {
+      name: 'restaurant name', 
+      suburb: 'somewhere', 
+      state: 'VIC', 
+      type: 'food type'
+    }
+    const ref = await addDoc( collection(FBdb, path), date)
+  }
+
   return (
 
     <Tab.Navigator id='RootNavigator'>
@@ -44,7 +64,7 @@ export function Tabs(props) {
         name='Find Table'
         options={{ headerShown: false }}
       >
-        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} />}
+        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={addData}/>}
       </Tab.Screen>
       <Tab.Screen name='Bookings' options={{ headerShown: false }} component={BookingsScreen} />
     </Tab.Navigator>
