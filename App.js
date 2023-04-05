@@ -23,11 +23,14 @@ import {
   signOut
 } from "firebase/auth"
 
+import { getFirestore } from 'firebase/firestore';
+
 
 const Stack = createNativeStackNavigator();
 
 const FBapp = initializeApp(firebaseConfig)
 const FBauth = getAuth(FBapp)
+const FBdb = getFirestore(FBapp)
 
 
 
