@@ -7,25 +7,50 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FindTableScreen } from '../screens/FindTableScreen';
 import { BookingsScreen } from '../screens/BookingsScreen';
 
+import { firebaseConfig } from '../config/Config';
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  signOut
+} from "firebase/auth";
+
+
+
 const Tab = createBottomTabNavigator();
+
+const FBapp = initializeApp(firebaseConfig)
+const FBauth = getAuth(FBapp)
 
 
 export function Tabs(props) {
 
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
 
-  // useEffect(() => {
-  //   if (!props.authStatus) {
-  //     navigation.reset({ index: 0, routes: [{ name: 'Login' }] })
-  //   }
-  // }, [props.authStatus])
+  useEffect(() => {
+    if (!props.authStatus) {
+        navigation.navigate('Login')
+    }
+}, [props.authStatus])
+
+const SignOut = () => {
+  signOut(FBauth)
+    .then(() => {
+      //now the user is signed out
+    })
+    .catch((error) => console.log(error))
+}
 
 
   return (
-
-    <Tab.Navigator id="RootNavigator">
-    <Tab.Screen name="Find Table" component={FindTableScreen} options={{ headerShown: false }} />
-    <Tab.Screen name="Bookings" component={BookingsScreen} />
+ 
+    <Tab.Navigator id='RootNavigator'>
+    <Tab.Screen 
+    name='Find Table'
+    options={{ headerShown: false }}
+    >
+    {(props) => <FindTableScreen {...props} signOutHandler={SignOut} />}
+    </Tab.Screen>
+    <Tab.Screen name='Bookings' options={{ headerShown: false }} component={BookingsScreen}/>
   </Tab.Navigator>
   )
 }

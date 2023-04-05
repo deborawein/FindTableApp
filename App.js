@@ -20,17 +20,15 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut
 } from "firebase/auth"
 
-import { getFirestore } from 'firebase/firestore';
+
 
 
 const Stack = createNativeStackNavigator();
 
 const FBapp = initializeApp(firebaseConfig)
 const FBauth = getAuth(FBapp)
-const FBdb = getFirestore(FBapp)
 
 
 
@@ -60,15 +58,20 @@ export default function App() {
       .catch((error) => console.log(error))
   }
 
-  const SignOut = () => {
-    signOut(FBauth)
-      .then(() => {
-        //now the user is signed out
-      })
-      .catch((err) => console.log(error))
-  }
+  // const SignOut = () => {
+  //   signOut(FBauth)
+  //     .then(() => {
+  //       //now the user is signed out
+  //     })
+  //     .catch((error) => console.log(error))
+  // }
 
 
+  // const AddData = async() => {
+  //   const path = 'restaurant/'
+  //   const data = new Date.getTime()
+  //   const ref = await addDoc (collection(FBdb, path), data)
+  // }
   // const GetData = () => {
   //   const userId = auth.uid
   //   const path = `users/${userId}/notes`
@@ -99,12 +102,14 @@ export default function App() {
         <Stack.Screen
           name='Sign In'
           options={{ headerShown: false }}>
-          {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} signOutHandler={SignOut} />}
+          {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} />}
         </Stack.Screen>
         <Stack.Screen
           name='Tabs'
           options={{ headerShown: false }}>
-          {(props) => <Tabs {...props} authStatus={auth} />}
+          {(props) => <Tabs {...props} authStatus={auth}
+          //  add={AddData} 
+           />}
         </Stack.Screen>
 
       </Stack.Navigator>
