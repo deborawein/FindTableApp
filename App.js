@@ -84,7 +84,7 @@ export default function App() {
       <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen
           name='Login'
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
           component={LoginScreen}
         />
         <Stack.Screen
@@ -100,7 +100,7 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen
           name='Tabs'
-          options={{ headerShown: true }}>
+          options={{ headerShown: false }}>
           {(props) => <Tabs {...props} authStatus={auth} />}
         </Stack.Screen>
 
