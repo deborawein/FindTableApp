@@ -44,7 +44,8 @@ export function SigninScreen(props) {
 
     useEffect(() => {
         if (props.authStatus) {
-            navigation.navigate('Tabs')
+            // navigation.navigate('Tabs')
+            navigation.reset( {index: 0, routes: [ {name: 'Tabs'}]})
         }
     }, [props.authStatus])
 

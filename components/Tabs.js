@@ -11,6 +11,7 @@ import { firebaseConfig } from '../config/Config';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
+  onAuthStateChanged,
   signOut
 } from "firebase/auth";
 import {
@@ -29,32 +30,43 @@ const FBauth = getAuth(FBapp)
 const FBdb = getFirestore(FBapp)
 
 export function Tabs(props) {
+  const [auth,setAuth] = useState()
+
 
   const navigation = useNavigation()
 
+  //If not autheticated add arrow to header
   useEffect(() => {
     if (!props.authStatus) {
       navigation.navigate('Login')
     }
   }, [props.authStatus])
 
+  //Sign out
   const SignOut = () => {
     signOut(FBauth)
-      .then(() => {
-        //now the user is signed out
-      })
+      .then(() => {})
       .catch((error) => console.log(error))
   }
 
-  const addData = async () => { 
-    const path = 'restaurants'
-    const date = {
-      name: 'restaurant name', 
-      suburb: 'somewhere', 
-      state: 'VIC', 
-      type: 'food type'
+  onAuthStateChanged(FBauth, (user) => {
+    if (user) {
+      setAuth(user)
+      console.log(user.uid)
     }
-    const ref = await addDoc( collection(FBdb, path), date)
+    else {
+      setAuth(null)
+    }
+  })
+
+  //Add data do Firebase
+  const addData = async () => {
+    const userId = auth.uid 
+    const path = `users/${userId}/table`
+    const data = {
+      table: '1'
+    }
+    const ref = await addDoc( collection(FBdb, path), data)
   }
 
   return (

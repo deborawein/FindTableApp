@@ -16,7 +16,7 @@ export function LoginScreen(props) {
         <Image source={imageWelcome} style={styles.imageWelcome} />
       </View>
       <View style={styles.mainContainer}>
-        <Text style={styles.welcomeText}>Welcome!</Text>
+        <Text style={styles.welcomeText}>Let's have dinner?!</Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Sign In')}
@@ -71,8 +71,9 @@ const styles = StyleSheet.create({
     color: '#FFA3AC',
     fontSize: 24,
     textAlign: 'center',
-    margin: 20,
     padding: 10,
+    marginTop: 50,
+    marginBottom: 30,
   },
   button: {
     backgroundColor: '#FF707E',
