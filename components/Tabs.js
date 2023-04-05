@@ -38,7 +38,8 @@ export function Tabs(props) {
   //If not autheticated add arrow to header
   useEffect(() => {
     if (!props.authStatus) {
-      navigation.navigate('Login')
+      navigation.reset( {index: 0, routes: [ {name: 'Login'}]})
+
     }
   }, [props.authStatus])
 

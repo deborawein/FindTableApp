@@ -71,7 +71,7 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen
           name='Tabs'
-          options={{ headerShown: false }}>
+          options={{ headerShown: true }}>
           {(props) => <Tabs {...props} authStatus={auth}
           //  add={AddData} 
           />}
