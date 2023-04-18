@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
+
 //Components
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
+
 
 // //Firebase
 // import { firebaseConfig } from '../config/Config';
@@ -62,6 +64,7 @@ export function FindTableScreen(props) {
 
 
     return (
+        
         <View>
             <Header />
             <Search />

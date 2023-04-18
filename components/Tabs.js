@@ -19,7 +19,10 @@ import {
   doc,
   setDoc,
   addDoc,
-  collection
+  collection,
+  query,
+  where,
+  onSnapshot
 } from 'firebase/firestore';
 import { async } from "@firebase/util";
 
@@ -30,7 +33,8 @@ const FBauth = getAuth(FBapp)
 const FBdb = getFirestore(FBapp)
 
 export function Tabs(props) {
-  const [auth,setAuth] = useState()
+  const [auth, setAuth] = useState()
+  const [restaurantData, setRestaurantData] = useState([])
 
 
   const navigation = useNavigation()
@@ -38,7 +42,7 @@ export function Tabs(props) {
   //If not autheticated add arrow to header
   useEffect(() => {
     if (!props.authStatus) {
-      navigation.reset( {index: 0, routes: [ {name: 'Login'}]})
+      navigation.reset({ index: 0, routes: [{ name: 'Login' }] })
 
     }
   }, [props.authStatus])
@@ -46,42 +50,69 @@ export function Tabs(props) {
   //Sign out
   const SignOut = () => {
     signOut(FBauth)
-      .then(() => {})
+      .then(() => { })
       .catch((error) => console.log(error))
   }
 
   onAuthStateChanged(FBauth, (user) => {
     if (user) {
       setAuth(user)
-      console.log(user.uid)
+      // console.log(user.uid)
     }
     else {
       setAuth(null)
     }
   })
 
-  //Add data do Firebase
+  //Add table to Firebase
   const AddData = async () => {
-    const userId = auth.uid 
+    const userId = auth.uid
     const path = `users/${userId}/table`
     const data = {
       table: '1'
     }
-    const ref = await addDoc( collection(FBdb, path), data)
+    const ref = await addDoc(collection(FBdb, path), data)
   }
 
- 
+  useEffect(() => {
+    if (restaurantData.length === 0 && auth) {
+      GetRestaurantData()
+    }
+  }
+  )
+
+  const GetRestaurantData = () => {
+    // const userId = auth.uid
+    const path = `restaurants`
+    const dataQuery = query(collection(FBdb, path))
+    const unsubscribe = onSnapshot(dataQuery, (querySnapshot) => {
+      let restaurants = []
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.data().name)
+        let item = doc.data()
+        item.id = doc.id
+        restaurants.push(item)
+      })
+      console.log(restaurants)
+      setRestaurantData(restaurants)
+    })
+  }
+
+
 
   return (
+  
+
 
     <Tab.Navigator id='RootNavigator'>
       <Tab.Screen
         name='Find Table'
         options={{ headerShown: false }}
       >
-        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={AddData}/>}
+        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={AddData} />}
       </Tab.Screen>
       <Tab.Screen name='Bookings' options={{ headerShown: false }} component={BookingsScreen} />
     </Tab.Navigator>
+    
   )
 }
