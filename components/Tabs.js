@@ -21,7 +21,6 @@ import {
   addDoc,
   collection,
   query,
-  where,
   onSnapshot
 } from 'firebase/firestore';
 import { async } from "@firebase/util";
@@ -48,11 +47,11 @@ export function Tabs(props) {
   }, [props.authStatus])
 
   //Sign out
-  const SignOut = () => {
-    signOut(FBauth)
-      .then(() => { })
-      .catch((error) => console.log(error))
-  }
+  // const SignOut = () => {
+  //   signOut(FBauth)
+  //     .then(() => { })
+  //     .catch((error) => console.log(error))
+  // }
 
   onAuthStateChanged(FBauth, (user) => {
     if (user) {
@@ -94,25 +93,24 @@ export function Tabs(props) {
         restaurants.push(item)
       })
       console.log(restaurants)
-      setRestaurantData(restaurants)
+      setRestaurantData (restaurants)
     })
   }
 
-
-
   return (
-  
-
 
     <Tab.Navigator id='RootNavigator'>
       <Tab.Screen
         name='Find Table'
-        options={{ headerShown: false }}
+        options={{ headerShown: false          
+         }}
       >
-        {(props) => <FindTableScreen {...props} signOutHandler={SignOut} addData={AddData} />}
+        {(props) => <FindTableScreen {...props} addData={AddData} />}
       </Tab.Screen>
-      <Tab.Screen name='Bookings' options={{ headerShown: false }} component={BookingsScreen} />
+      <Tab.Screen 
+      name='Bookings' options={{ headerShown: false }} >
+      {(props) => <BookingsScreen {...props} />}
+      </Tab.Screen>
     </Tab.Navigator>
-    
   )
 }
