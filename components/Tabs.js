@@ -105,7 +105,7 @@ export function Tabs(props) {
         options={{ headerShown: false          
          }}
       >
-        {(props) => <FindTableScreen {...props} addData={AddData} />}
+        {(props) => <FindTableScreen {...props} restaurantData={restaurantData} />}
       </Tab.Screen>
       <Tab.Screen 
       name='Bookings' options={{ headerShown: false }} >
