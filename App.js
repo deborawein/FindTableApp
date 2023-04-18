@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
 import { SignupScreen } from './screens/SignupScreen';
-import { Tabs } from './components/Tabs';
+import { HomeTab } from './screens/HomeTab';
 //Firebase
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app'
@@ -26,12 +26,10 @@ const FBauth = getAuth(FBapp)
 
 export default function App() {
   const [auth, setAuth] = useState()
-  // const [ errorMsg, setErrorMsg ] = useState()
 
   onAuthStateChanged(FBauth, (user) => {
     if (user) {
       setAuth(user)
-      console.log(user.uid)
     }
     else {
       setAuth(null)
@@ -52,27 +50,29 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator
+      // initialRouteName='Login'
+      >
         <Stack.Screen
           name='Login'
-          options={{ headerShown: false }}
-          component={LoginScreen}
-        />
+          options={{ headerShown: true }}>
+          {(props) => <LoginScreen {...props} />}
+        </Stack.Screen>
         <Stack.Screen
           name='Sign Up'
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         >
           {(props) => <SignupScreen {...props} handler={SignUp} authStatus={auth} />}
         </Stack.Screen>
         <Stack.Screen
           name='Sign In'
-          options={{ headerShown: false }}>
+          options={{ headerShown: true }}>
           {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} />}
         </Stack.Screen>
         <Stack.Screen
-          name='Tabs'
-          options={{ headerShown: false }}>
-          {(props) => <Tabs {...props} authStatus={auth}
+          name='HomeTab'
+          options={{ headerShown: true }}>
+          {(props) => <HomeTab {...props} authStatus={auth}
           //  add={AddData} 
           />}
         </Stack.Screen>

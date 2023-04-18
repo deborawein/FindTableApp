@@ -43,11 +43,12 @@ export function SignupScreen(props) {
         }
     })
 
-
     useEffect(() => {
         if (props.authStatus) {
-            // navigation.navigate('Tabs')
-            navigation.reset( {index: 0, routes: [ {name: 'Tabs'}]})
+            // navigate adds a back arrow to the header
+            // navigation.navigate("Home")
+            // reset will make "Home" the root page of the navigation
+            navigation.reset({ index: 0, routes: [{ name: "HomeTab" }] })
         }
     }, [props.authStatus])
 
