@@ -55,23 +55,23 @@ export default function App() {
       >
         <Stack.Screen
           name='Login'
-          options={{ headerShown: true }}>
+          options={{ headerShown: false }}>
           {(props) => <LoginScreen {...props} />}
         </Stack.Screen>
         <Stack.Screen
           name='Sign Up'
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         >
           {(props) => <SignupScreen {...props} handler={SignUp} authStatus={auth} />}
         </Stack.Screen>
         <Stack.Screen
           name='Sign In'
-          options={{ headerShown: true }}>
+          options={{ headerShown: false }}>
           {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} />}
         </Stack.Screen>
         <Stack.Screen
           name='HomeTab'
-          options={{ headerShown: true }}>
+          options={{ headerShown: false }}>
           {(props) => <HomeTab {...props} authStatus={auth}
           //  add={AddData} 
           />}

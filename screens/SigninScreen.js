@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     validInput: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: "FF707E",
         borderRadius: 5,

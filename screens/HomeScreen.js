@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 
@@ -6,11 +6,13 @@ import { useState, useEffect } from 'react';
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
 
+const imageRestaurant = require('../assets/restaurant.png');
+
 export function HomeScreen(props) {
     const navigation = useNavigation()
 
     const ListClickHandler = (data) => {
-        navigation.navigate("Reservation", data)
+        navigation.navigate("Reserve", data)
     }
 
     const ListItem = (props) => {
@@ -24,6 +26,7 @@ export function HomeScreen(props) {
                             }
                         )
                     }>
+                    <Image source={imageRestaurant} style={styles.imageRestaurant} />
                     <Text style={styles.itemName}>{props.name}</Text>
                     <Text style={styles.itemDescription}>{props.type} • {props.suburb}, {props.state}</Text>
                 </TouchableOpacity>
@@ -79,6 +82,10 @@ const styles = StyleSheet.create({
     itemList: {
         padding: 20,
     },
+    imageRestaurant: {
+        resizeMode: 'contain',
+        width: '100%',
+      },
     itemName: {
         fontWeight: 'bold',
         fontSize: 18,

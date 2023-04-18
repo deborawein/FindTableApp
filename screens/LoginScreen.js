@@ -2,6 +2,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+
 const imageWelcome = require('../assets/welcome.png');
 const logo = require('../assets/logo.png');
 
@@ -16,20 +17,16 @@ export function LoginScreen(props) {
         <Image source={imageWelcome} style={styles.imageWelcome} />
       </View>
       <View style={styles.mainContainer}>
-        <Text style={styles.welcomeText}>Let's have dinner?!</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Sign In')}
-        >
-          <Text style={styles.buttonText}>
-            LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Sign Up')}
-        >
-          <Text style={styles.buttonText}>SIGN UP</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonBox}>
+
+          <Text style={styles.welcomeText}>Let's have dinner?!</Text>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
+            <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.imageLogo} />
@@ -55,6 +52,10 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 40,
     borderTopEndRadius: 40,
   },
+  buttonBox: {
+    marginHorizontal: 20,
+    display: 'flex'
+  },
   logoContainer: {
     flex: 1,
     padding: 10,
@@ -78,9 +79,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FF707E',
     padding: 10,
-    marginHorizontal: 80,
-    marginVertical: 10,
-    borderRadius: 20,
+    marginHorizontal: 0,
+    marginVertical: 15,
+    borderRadius: 10,
   },
   buttonText: {
     textAlign: 'center',

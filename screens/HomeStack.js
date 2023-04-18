@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 
 import { HomeScreen } from './HomeScreen';
-import { ReservationScreen } from './ReservationScreen';
+import { ReserveScreen } from './ReserveScreen';
 
 //Firebase
 import { firebaseConfig } from '../config/Config';
@@ -61,18 +61,18 @@ export function HomeStack(props) {
       <Stack.Screen
         name='Home'
         options={{
-          headerShown: true
+          headerShown: false
         }}
       >
         {(props) => <HomeScreen {...props} restaurantData={restaurantData} />}
       </Stack.Screen>
       <Stack.Screen
-        name='Reservation'
+        name='Reserve'
         options={{
           headerShown: true
         }}
       >
-        {(props) => <ReservationScreen {...props} />}
+        {(props) => <ReserveScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

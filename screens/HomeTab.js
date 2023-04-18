@@ -25,7 +25,7 @@ export function HomeTab(props) {
       <Tab.Screen
         name='HomeStack'
         options={{
-          headerShown: true
+          headerShown: false
         }}
       >
         {(props) => <HomeStack {...props} />}
@@ -33,7 +33,7 @@ export function HomeTab(props) {
       <Tab.Screen
         name='Bookings'
         options={{
-          headerShown: true
+          headerShown: false
         }}
       >
         {(props) => <BookingsScreen {...props} />}
