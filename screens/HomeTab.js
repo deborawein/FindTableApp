@@ -8,6 +8,8 @@ import { HomeStack } from "./HomeStack";
 import { BookingsScreen } from "./BookingsScreen"
 //context
 import { AuthContext } from "../context/AuthContext";
+//icon
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +29,13 @@ export function HomeTab(props) {
       <Tab.Screen
         name='HomeStack'
         options={{
-          headerShown: false
+          headerShown: false,
+          tabBarLabel: 'Find Table',
+          tabBarIcon: ()=>(  
+            <Ionicons name="restaurant" size={24} color="#FF707E" /> 
+        )  
+          
+
         }}
       >
         {(props) => <HomeStack {...props} />}
@@ -35,7 +43,11 @@ export function HomeTab(props) {
       <Tab.Screen
         name='Bookings'
         options={{
-          headerShown: false
+          headerShown: false,
+          tabBarLabel: 'Bookings',
+          tabBarIcon: ()=>( 
+            <Ionicons name="today" size={24} color="#FF707E" />
+          )
         }}
       >
         {(props) => <BookingsScreen {...props} />}

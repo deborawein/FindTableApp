@@ -3,6 +3,8 @@ import { useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
 //context
 import { AuthContext } from "../context/AuthContext";
+import { DBContext } from '../context/DBContext';
+
 
 import { TimeButton } from '../components/TimeButton';
 
@@ -12,6 +14,29 @@ const imageRestaurant = require('../assets/restaurant.png');
 
 export function ReserveScreen(props) {
     const authStatus = useContext(AuthContext)
+    const DB = useContext(DBContext)
+
+    const [nameRest, setNameRest] = useState('')
+    const [time, setTime] = useState('')
+    const [guest, setGuest] = useState('')
+    const [dateReserve, setDateReserve] = useState('')
+
+    const [disabled, setDisabled] = useState(false)
+    useEffect(() => {
+        if (disabled) {
+            setDisabled(true)
+        }
+        else {
+            setDisabled(false)
+        }
+    })
+
+    const saveReservation = async () => {
+        const reservationObj = { name: nameRest, time: time, guest: guest, dateReserve: dateReserve }
+        //ad note to firebase
+        const path = `users/${authStatus.uid}/reservations`
+        const ref = await addDoc(collection(DB, path), reservationObj)
+    }
 
     const route = useRoute();
     const { id, name, type, suburb, state } = route.params
@@ -29,6 +54,8 @@ export function ReserveScreen(props) {
                     <TextInput
                         style={styles.inputGuest}
                         placeholder="2"
+                        value={guest}
+                        onChangeText={(val) => setGuest(val)}
                     />
                 </View>
                 <View style={styles.inputBox}>
@@ -36,6 +63,8 @@ export function ReserveScreen(props) {
                     <TextInput
                         style={styles.inputDate}
                         placeholder="12/02/2023"
+                        value={dateReserve}
+                        onChangeText={(val) => setDateReserve(val)}
                     />
                 </View>
             </View>
@@ -47,7 +76,12 @@ export function ReserveScreen(props) {
 
             <View style={styles.row}>
                 <View style={styles.inputBox}>
-                    <TimeButton time="18:00" />
+                    <TouchableOpacity
+                        style={(disabled) ? styles.timeButton : styles.timeButtonDisabled}
+                        onPress={() => setDisabled(!disabled)}
+                    >
+                        <Text style={styles.timeButtonText}> 18:00 </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.inputBox}>
                     <TimeButton time="18:30" />
@@ -141,21 +175,22 @@ const styles = StyleSheet.create({
     timeButton: {
         backgroundColor: '#FF707E',
         padding: 10,
-        marginHorizontal: 80,
-        marginVertical: 30,
         borderRadius: 10,
-        flexDirection: 'column',
-        display: 'flex',
+                borderColor: '#999999',
+        borderWidth: 1,
     },
 
     timeButtonDisabled: {
         backgroundColor: '#BFBFC1',
         padding: 10,
-        marginHorizontal: 10,
-        marginVertical: 10,
         borderRadius: 10,
-        flexDirection: 'column',
-        display: 'flex',
+        borderColor: '#999999',
+        borderWidth: 1,
+    },
+    timeButtonText: {
+        color: 'black', 
+        textAlign: 'center'
+
     },
     button: {
         backgroundColor: '#FF707E',
