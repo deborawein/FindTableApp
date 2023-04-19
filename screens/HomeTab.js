@@ -26,15 +26,27 @@ export function HomeTab(props) {
 
   return (
 
-    <Tab.Navigator id='TabNavigator'>
+    <Tab.Navigator
+    screenOptions={{
+      tabBarActiveTintColor: "#FFA3AC",
+      tabBarInactiveTintColor: "#00043C",
+      tabBarStyle: {
+        backgroundColor: '#00043C',
+        height: 60
+      },
+      tabBarLabelStyle: {
+        fontSize: 12,
+        margin: 5,
+      },
+    }}>
       <Tab.Screen
         name='HomeStack'
         options={{
           headerShown: false,
           tabBarLabel: 'Find Table',
-          tabBarIcon: ()=>(  
-            <Ionicons name="restaurant" size={24} color="#FF707E" /> 
-        )  
+          tabBarIcon: () => (
+            <Ionicons name="restaurant" size={24} color="#FF707E" />
+          )
         }}
       >
         {(props) => <HomeStack {...props} />}
@@ -44,7 +56,7 @@ export function HomeTab(props) {
         options={{
           headerShown: false,
           tabBarLabel: 'Bookings',
-          tabBarIcon: ()=>( <FontAwesome5 name="calendar-check" size={24} color="#FF707E" />)
+          tabBarIcon: () => (<FontAwesome5 name="calendar-check" size={24} color="#FF707E" />)
         }}>
         {(props) => <BookingsStack {...props} />}
       </Tab.Screen>

@@ -7,9 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
 //firebase
-import { addDoc, collection } from 'firebase/firestore'
+import { deleteDoc, doc, collection } from 'firebase/firestore'
 
-const imageRestaurant = require('../assets/restaurant.png');
 
 export function UpdateScreen(props) {
     const authStatus = useContext(AuthContext)
@@ -17,15 +16,15 @@ export function UpdateScreen(props) {
     const routeUpdate = useRoute();
     const navigation = useNavigation()
 
-    const { id, name, guest, date, time, firstname, lastname, phone } = routeUpdate.params
+    const { id, name, guest, date, time, firstname, lastname, phone, image } = routeUpdate.params
 
-    [guest, setGuest] = useState('')
-    [date, setDate] = useState('')
-    [time, setTime] = useState('')
+    const [guestUp, setGuestUp] = useState(guest)
+    const [dateUp, setDateUp] = useState(date)
+    const [timeUp, setTimeUp] = useState(time)
 
-    [firstname, setFirstname] = useState('')
-    [lastname, setLastname] = useState('')
-    [phone, setPhone] = useState('')
+    const [firstnameUp, setFirstnameUp] = useState(firstname)
+    const [lastnameUp, setLastnameUp] = useState(lastname)
+    const [phoneUp, setPhoneUp] = useState(phone)
 
 
     const saveReservation = async () => {
@@ -36,16 +35,17 @@ export function UpdateScreen(props) {
         navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
     }
 
+
+
     return (
         <View style={styles.page}>
-            <Image source={imageRestaurant} style={styles.imageRestaurant} />
             <Text style={styles.restName}>{name}</Text>
             <View style={styles.row}>
                 <View style={styles.leftBox}>
                     <Text style={styles.inputText}>Guests</Text>
                     <TextInput
                         style={styles.input}
-                        value={guest}
+                        value={guestUp}
                         onChangeText={(val) => setGuestUp(val)}
                     />
                 </View>
@@ -54,7 +54,7 @@ export function UpdateScreen(props) {
                     <TextInput
                         style={styles.input}
                         value={dateUp}
-                        onChangeText={(val) => setDate(val)}
+                        onChangeText={(val) => setDateUp(val)}
                     />
                 </View>
             </View>
@@ -62,8 +62,8 @@ export function UpdateScreen(props) {
             <Text style={styles.inputText}>Booking Time</Text>
             <TextInput
                 style={styles.input}
-                value={time}
-                onChangeText={(val) => setTime(val)}
+                value={timeUp}
+                onChangeText={(val) => setTimeUp(val)}
             />
             <Text style={styles.contact}>Contact Info</Text>
             <View style={styles.row}>
@@ -71,16 +71,16 @@ export function UpdateScreen(props) {
                     <Text style={styles.inputText}>First name</Text>
                     <TextInput
                         style={styles.input}
-                        value={firstname}
-                        onChangeText={(val) => setFirstname(val)}
+                        value={firstnameUp}
+                        onChangeText={(val) => setFirstnameUp(val)}
                     />
                 </View>
                 <View style={styles.rightBox}>
                     <Text style={styles.inputText}>Last name</Text>
                     <TextInput
                         style={styles.input}
-                        value={lastname}
-                        onChangeText={(val) => setLastname(val)}
+                        value={lastnameUp}
+                        onChangeText={(val) => setLastnameUp(val)}
                     />
                 </View>
             </View>
@@ -88,14 +88,14 @@ export function UpdateScreen(props) {
             <Text style={styles.inputText}>Phone number</Text>
             <TextInput
                 style={styles.input}
-                value={phone}
-                onChangeText={(val) => setPhone(val)}
+                value={phoneUp}
+                onChangeText={(val) => setPhoneUp(val)}
             />
 
             <TouchableOpacity style={styles.button}
-            onPress={() => saveReservation()}
+            onPress={() => updateReservation()}
             >
-                <Text style={styles.buttonText}>RESERVE</Text>
+                <Text style={styles.buttonText}>EDIT</Text>
             </TouchableOpacity>
         </View>
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 15,
+        padding: 10,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,

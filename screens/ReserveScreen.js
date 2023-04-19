@@ -27,7 +27,7 @@ export function ReserveScreen(props) {
 
 
     const saveReservation = async () => {
-        const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone }
+        const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone, image: image }
         //ad note to firebase
         const path = `users/${authStatus.uid}/reservations`
         const ref = await addDoc(collection(DB, path), reservationObj)
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 15,
+        padding: 10,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,

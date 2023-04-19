@@ -2,7 +2,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } fr
 import { useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
-
+//components
+import { InfoListItem } from '../components/InfoListItem';
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
@@ -10,17 +11,28 @@ import { DBContext } from '../context/DBContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
+import { deleteDoc, doc, collection } from 'firebase/firestore'
+
+
 export function InfoScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
     const routeInfo = useRoute();
     const navigation = useNavigation()
 
-    const { id, name, guest, date, time, firstname, lastname, phone } = routeInfo.params
+    const { id, name, guest, date, time, firstname, lastname, phone, image } = routeInfo.params
 
     const ListClickHandler = (data) => {
-        navigation.navigate("Update", data)
-      }
+        console.log(data)
+        navigation.navigate("Edit", data)
+    }
+
+    const cancelReservation = () => {
+        const path = `users/${authStatus.uid}/reservations`
+        deleteDoc(doc(DB, `restaurants`, id))
+        console.log(path)
+    }
+
     return (
         <View>
 
@@ -37,29 +49,23 @@ export function InfoScreen(props) {
                 <Text style={styles.contactText}>{firstname} {lastname}</Text>
                 <Text style={styles.contactText}>{phone}</Text>
             </View>
-                <TouchableOpacity style={styles.button}
-                          onPress={
-                            () => ListClickHandler(
-                              {
-                                id: {id}, 
-                                name: {name}, 
-                                guest: {guest}, 
-                                date: {date}, 
-                                firstname: {firstname}, 
-                                lastname: {lastname}, 
-                                phone: {phone}
-                              }
-                            )
-                          }
-                >
-                    <Text style={styles.buttonText}>EDIT</Text>
-                </TouchableOpacity>
-            {/* <View style={styles.buttonBox}> */}
-                <TouchableOpacity style={styles.button}
-                // onPress={() => navigation.navigate('Update')}
-                >
-                    <Text style={styles.buttonText}>CANCEL</Text>
-                </TouchableOpacity>
+            <InfoListItem
+                id={id}
+                name={name}
+                date={date}
+                guest={guest}
+                time={time}
+                firstname={firstname}
+                lastname={lastname}
+                phone={phone}
+                image={image}
+                handler={ListClickHandler}
+            />
+            <TouchableOpacity style={styles.button}
+            // onPress={() => navigation.navigate('Delete')}
+            >
+                <Text style={styles.buttonText} onPress={() => cancelReservation}>CANCEL BOOKING</Text>
+            </TouchableOpacity>
             {/* </View> */}
         </View>
     )
@@ -68,7 +74,7 @@ export function InfoScreen(props) {
 const styles = StyleSheet.create({
     titleBox: {
         flex: 1,
-        padding: 20,
+        padding: 10,
     },
     title: {
         fontSize: 20,
@@ -80,12 +86,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     box: {
-        flex: 1,
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingTop: 10,
     },
     bookingText: {
         fontSize: 12,
-        paddingVertical: 10,
+        paddingVertical: 5,
+        fontWeight: 'bold'
     },
     contactTitle: {
         fontSize: 16,
@@ -95,17 +102,16 @@ const styles = StyleSheet.create({
     contactText: {
         fontSize: 12,
     },
-    buttonBox:{
+    buttonBox: {
         padding: 20,
-
     },
     button: {
         backgroundColor: '#FF707E',
         padding: 10,
         borderRadius: 10,
-        marginVertical: 10,
+        marginTop: 20,
         marginHorizontal: 20
-    }, 
+    },
     buttonText: {
         textAlign: 'center',
         color: '#FFFFFF',

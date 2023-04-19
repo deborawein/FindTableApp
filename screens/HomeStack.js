@@ -15,11 +15,16 @@ export function HomeStack(props) {
   const authStatus = useContext(AuthContext)
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Home' options={{headerShown: false }}>
+    <Stack.Navigator >
+      <Stack.Screen name='Home' options={{ headerShown: false }}>
         {(props) => <HomeScreen {...props} />}
       </Stack.Screen>
-      <Stack.Screen name='Reservation' options={{headerShown: true}} >
+      <Stack.Screen name='Reservation'
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: '#00043C' },
+          headerTintColor: '#FFA3AC',
+        }} >
         {(props) => <ReserveScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
