@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Screen
 import { HomeStack } from "./HomeStack";
-import { BookingsScreen } from "./BookingsScreen"
+import { BookingsStack } from "./BookingsStack";
 //context
 import { AuthContext } from "../context/AuthContext";
 //icon
@@ -29,28 +29,23 @@ export function HomeTab(props) {
       <Tab.Screen
         name='HomeStack'
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: 'Find Table',
           tabBarIcon: ()=>(  
             <Ionicons name="restaurant" size={24} color="#FF707E" /> 
         )  
-          
-
         }}
       >
         {(props) => <HomeStack {...props} />}
       </Tab.Screen>
       <Tab.Screen
-        name='Bookings'
+        name='BookingsStack'
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: 'Bookings',
-          tabBarIcon: ()=>( 
-            <Ionicons name="today" size={24} color="#FF707E" />
-          )
-        }}
-      >
-        {(props) => <BookingsScreen {...props} />}
+          tabBarIcon: ()=>( <Ionicons name="today" size={24} color="#FF707E" />)
+        }}>
+        {(props) => <BookingsStack {...props} />}
       </Tab.Screen>
     </Tab.Navigator>
   )

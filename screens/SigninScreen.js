@@ -4,9 +4,10 @@ import { useEffect, useState, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
 //context
 import { AuthContext } from "../context/AuthContext";
+//icon
+import { AntDesign } from '@expo/vector-icons';
 
 const logo = require('../assets/logo.png');
-const xmark = require('../assets/xmark.png');
 
 export function SigninScreen(props) {
     const [email, setEmail] = useState("")
@@ -54,8 +55,8 @@ export function SigninScreen(props) {
 
     return (
         <View style={styles.page}>
-            <TouchableOpacity onPress={() => navigation.popToTop()}>
-                <Image source={xmark} style={styles.xmark} />
+            <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
+                <AntDesign name="closecircle" size={24} color="#FF707E" />
             </TouchableOpacity>
             <View style={styles.containerImage}>
                 <Image source={logo} style={styles.imageLogo} />
@@ -77,20 +78,22 @@ export function SigninScreen(props) {
                     onChangeText={(pwText) => setPassword(pwText)}
                     secureTextEntry={true}
                 />
-                <TouchableOpacity
-                    style={(validForm) ? styles.button : styles.buttonDisabled}
-                    disabled={(validForm) ? false : true}
-                    onPress={() => props.handler(email, password)}
-                >
-                    <Text style={styles.buttonText}>LOGIN</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.containerSignup}
-                    onPress={() => navigation.navigate('Sign Up')}>
-                    <Text style={styles.signupText}>
-                        Don't have an account? Sign up here.
-                    </Text>
-                </TouchableOpacity>
+                <View style={styles.buttonBox}>
+                    <TouchableOpacity
+                        style={(validForm) ? styles.button : styles.buttonDisabled}
+                        disabled={(validForm) ? false : true}
+                        onPress={() => props.handler(email, password)}
+                    >
+                        <Text style={styles.buttonText}>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.containerSignup}
+                        onPress={() => navigation.navigate('Sign Up')}>
+                        <Text style={styles.signupText}>
+                            Don't have an account? Sign up here.
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
         borderColor: '#BFBFC1',
         borderRadius: 5,
         fontSize: 12,
-        marginHorizontal: 50,
+        marginHorizontal: 20,
     },
     validInput: {
         backgroundColor: '#ffffff',
@@ -147,15 +150,19 @@ const styles = StyleSheet.create({
     inputText: {
         color: '#ff707e',
         fontSize: 12,
-        marginHorizontal: 50,
+        marginHorizontal: 20,
         marginTop: 10,
+    },
+    buttonBox: {
+        marginHorizontal: 20,
+        display: 'flex'
     },
     button: {
         backgroundColor: '#FF707E',
         padding: 10,
-        marginHorizontal: 80,
-        marginVertical: 30,
-        borderRadius: 20,
+        marginHorizontal: 0,
+        marginVertical: 15,
+        borderRadius: 10,
     },
     buttonText: {
         textAlign: 'center',
@@ -165,9 +172,9 @@ const styles = StyleSheet.create({
     buttonDisabled: {
         backgroundColor: '#BFBFC1',
         padding: 10,
-        marginHorizontal: 80,
-        marginVertical: 30,
-        borderRadius: 20,
+        marginHorizontal: 0,
+        marginVertical: 15,
+        borderRadius: 10,
     },
     signupText: {
         textAlign: 'center',
@@ -176,9 +183,7 @@ const styles = StyleSheet.create({
     },
     xmark: {
         alignSelf: 'flex-end',
-        width: 20,
-        height: 20,
-        marginTop: 25,
-        marginEnd: 10,
+        marginTop: 20,
+        marginEnd: 20,
     }
 })

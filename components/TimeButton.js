@@ -12,24 +12,22 @@ export const TimeButton = (props) => {
         }
     })
     return (
-
-
         <TouchableOpacity
             style={(disabled) ? styles.timeButton : styles.timeButtonDisabled}
             onPress={() => setDisabled(!disabled)}
         >
-            <Text style={styles.timeButtonText}> {props.time}</Text>
+            <Text style={styles.timeButtonText}>{props.time}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    
+
     timeButton: {
         backgroundColor: '#FF707E',
         padding: 10,
         borderRadius: 10,
-                borderColor: '#999999',
+        borderColor: '#999999',
         borderWidth: 1,
     },
 
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     timeButtonText: {
-        color: 'black', 
+        color: 'black',
         textAlign: 'center'
 
     }

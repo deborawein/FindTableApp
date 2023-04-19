@@ -1,9 +1,13 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
+import { useNavigation } from "@react-navigation/native";
+
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
+//firebase
+import { addDoc, collection } from 'firebase/firestore'
 
 
 import { TimeButton } from '../components/TimeButton';
@@ -15,8 +19,11 @@ const imageRestaurant = require('../assets/restaurant.png');
 export function ReserveScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
+    const route = useRoute();
+    const navigation = useNavigation()
 
-    const [nameRest, setNameRest] = useState('')
+    const { id, name, type, suburb, state } = route.params
+
     const [time, setTime] = useState('')
     const [guest, setGuest] = useState('')
     const [dateReserve, setDateReserve] = useState('')
@@ -31,15 +38,16 @@ export function ReserveScreen(props) {
         }
     })
 
+
     const saveReservation = async () => {
-        const reservationObj = { name: nameRest, time: time, guest: guest, dateReserve: dateReserve }
+        const reservationObj = { nameRest: name, guest: guest, dateReserve: dateReserve }
         //ad note to firebase
         const path = `users/${authStatus.uid}/reservations`
         const ref = await addDoc(collection(DB, path), reservationObj)
+        navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
     }
 
-    const route = useRoute();
-    const { id, name, type, suburb, state } = route.params
+
     return (
         <View>
             <View style={styles.container}>
@@ -53,7 +61,7 @@ export function ReserveScreen(props) {
                     <Text style={styles.inputTextGuest}>Guests</Text>
                     <TextInput
                         style={styles.inputGuest}
-                        placeholder="2"
+                        placeholder=""
                         value={guest}
                         onChangeText={(val) => setGuest(val)}
                     />
@@ -62,7 +70,7 @@ export function ReserveScreen(props) {
                     <Text style={styles.inputTextDate}>Date</Text>
                     <TextInput
                         style={styles.inputDate}
-                        placeholder="12/02/2023"
+                        placeholder=""
                         value={dateReserve}
                         onChangeText={(val) => setDateReserve(val)}
                     />
@@ -76,33 +84,26 @@ export function ReserveScreen(props) {
 
             <View style={styles.row}>
                 <View style={styles.inputBox}>
-                    <TouchableOpacity
-                        style={(disabled) ? styles.timeButton : styles.timeButtonDisabled}
-                        onPress={() => setDisabled(!disabled)}
-                    >
-                        <Text style={styles.timeButtonText}> 18:00 </Text>
-                    </TouchableOpacity>
+                    <TimeButton time='18:00' />
                 </View>
                 <View style={styles.inputBox}>
-                    <TimeButton time="18:30" />
+                    <TimeButton time='18:30' />
                 </View>
                 <View style={styles.inputBox}>
-                    <TimeButton time="19:00" />
-                </View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.inputBox}>
-                    <TimeButton time="19:30" />
+                    <TimeButton time='19:00' />
                 </View>
                 <View style={styles.inputBox}>
-                    <TimeButton time="20:00" />
+                    <TimeButton time='19:30' />
                 </View>
                 <View style={styles.inputBox}>
-                    <TimeButton time="20:30" />
+                    <TimeButton time='20:00' />
+                </View>
+                <View style={styles.inputBox}>
+                    <TimeButton time='20:30' />
                 </View>
             </View>
             <View style={styles.container}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => saveReservation()}>
                     <Text style={styles.buttonText}>RESERVE</Text>
                 </TouchableOpacity>
             </View>
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF707E',
         padding: 10,
         borderRadius: 10,
-                borderColor: '#999999',
+        borderColor: '#999999',
         borderWidth: 1,
     },
 
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     timeButtonText: {
-        color: 'black', 
+        color: 'black',
         textAlign: 'center'
 
     },

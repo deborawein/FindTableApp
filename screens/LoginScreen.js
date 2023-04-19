@@ -23,7 +23,7 @@ export function LoginScreen(props) {
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
             <Text style={styles.buttonText}>LOGIN</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
             <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
           </TouchableOpacity>
         </View>

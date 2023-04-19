@@ -9,6 +9,7 @@ import { AuthContext } from './context/AuthContext';
 import { RestaurantContext } from './context/RestaurantContext';
 import { DBContext } from './context/DBContext';
 import { FBAuthContext } from './context/FBAuthContext';
+import { ReservationContext } from './context/ReservationContext';
 //screens
 import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
@@ -45,6 +46,8 @@ const FBdb = getFirestore(FBapp)
 export default function App() {
   const [auth, setAuth] = useState()
   const [restaurantData, setRestaurantData] = useState([])
+  const [reservationData, setReservationData] = useState([])
+
 
   onAuthStateChanged(FBauth, (user) => {
     if (user) {
@@ -58,6 +61,12 @@ export default function App() {
   useEffect(() => {
     if (restaurantData.length === 0 && auth) {
       GetRestaurantData()
+    }
+  })
+
+  useEffect(() => {
+    if (reservationData.length === 0 && auth) {
+      GetReservationData()
     }
   })
 
@@ -89,13 +98,30 @@ export default function App() {
     })
   }
 
+  const GetReservationData = () => {
+    const userId = auth.uid
+    const path = `users/${userId}/reservations`
+    const dataQuery = query(collection(FBdb, path))
+    const unsubscribe = onSnapshot(dataQuery, (responseData) => {
+      let reservations = []
+      responseData.forEach((reserve) => {
+        let item = reserve.data()
+        item.id = reserve.id
+        reservations.push(item)
+      })
+      console.log(reservations)
+
+      setReservationData(reservations)
+    })
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Login' options={{ headerShown: false }}>
+        <Stack.Screen name='Login' options={{ headerShown: true }}>
           {(props) => <LoginScreen {...props} />}
         </Stack.Screen>
-        <Stack.Screen name='Sign Up' options={{ headerShown: false }}
+        <Stack.Screen name='Sign Up' options={{ headerShown: true }}
         >
           {(props) =>
             <AuthContext.Provider value={auth}>
@@ -103,20 +129,22 @@ export default function App() {
             </AuthContext.Provider>
           }
         </Stack.Screen>
-        <Stack.Screen name='Sign In' options={{ headerShown: false }}>
+        <Stack.Screen name='Sign In' options={{ headerShown: true }}>
           {(props) =>
             <AuthContext.Provider value={auth}>
               <SigninScreen {...props} handler={SignIn} />
             </AuthContext.Provider>
           }
         </Stack.Screen>
-        <Stack.Screen name='HomeTab' options={{ headerShown: false }}>
+        <Stack.Screen name='HomeTab' options={{ headerShown: true }}>
           {(props) =>
             <FBAuthContext.Provider value={FBauth} >
               <DBContext.Provider value={FBdb}>
                 <AuthContext.Provider value={auth}>
                   <RestaurantContext.Provider value={restaurantData}>
-                    <HomeTab {...props} />
+                    <ReservationContext.Provider value={reservationData}>
+                      <HomeTab {...props} />
+                    </ReservationContext.Provider>
                   </RestaurantContext.Provider>
                 </AuthContext.Provider>
               </DBContext.Provider>
