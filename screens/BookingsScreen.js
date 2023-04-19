@@ -8,7 +8,6 @@ import { ReservationContext } from '../context/ReservationContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
-const imageRestaurant = require('../assets/restaurant.png');
 
 export function BookingsScreen(props) {
   const navigation = useNavigation()
@@ -33,13 +32,14 @@ export function BookingsScreen(props) {
                 time: props.time, 
                 firstname: props.firstname, 
                 lastname: props.lastname, 
-                phone: props.phone
+                phone: props.phone,
+                image: props.image
               }
             )
           }
         >
           <View style={styles.container}>
-            <Image source={imageRestaurant} style={styles.imageRestaurant} />
+            <Image source={props.image} style={styles.imageRestaurant} />
             <Text style={styles.itemName}>{props.name}</Text>
           </View>
           <View style={styles.row}>
@@ -78,6 +78,7 @@ export function BookingsScreen(props) {
             firstname={item.firstname}
             lastname={item.lastname}
             phone={item.phone}
+            image={item.image}
           />
         )}
         keyExtractor={item => item.id}
@@ -113,8 +114,9 @@ const styles = StyleSheet.create({
   },
 
   imageRestaurant: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: '100%',
+    height: 200
   },
   itemName: {
     fontWeight: 'bold',

@@ -19,7 +19,7 @@ export function HomeStack(props) {
       <Stack.Screen name='Home' options={{headerShown: false }}>
         {(props) => <HomeScreen {...props} />}
       </Stack.Screen>
-      <Stack.Screen name='Reserve' options={{headerShown: true}} >
+      <Stack.Screen name='Reservation' options={{headerShown: true}} >
         {(props) => <ReserveScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>

@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 
-const logo = require('../assets/logo.png')
-
 export function Search(props) {
     return (
         <View style={styles.container}>

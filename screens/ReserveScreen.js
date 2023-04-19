@@ -9,18 +9,13 @@ import { DBContext } from '../context/DBContext';
 //firebase
 import { addDoc, collection } from 'firebase/firestore'
 
-
-const imageRestaurant = require('../assets/restaurant.png');
-
-
-
 export function ReserveScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
     const routeRest = useRoute();
     const navigation = useNavigation()
 
-    const { id, name, type, suburb, state } = routeRest.params
+    const { id, name, type, suburb, state, image } = routeRest.params
 
     const [guest, setGuest] = useState('')
     const [date, setDate] = useState('')
@@ -42,7 +37,7 @@ export function ReserveScreen(props) {
 
     return (
         <View style={styles.page}>
-            <Image source={imageRestaurant} style={styles.imageRestaurant} />
+            <Image source={image} style={styles.imageRestaurant} />
             <Text style={styles.restName}>{name}</Text>
             <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
             <View style={styles.row}>
@@ -122,14 +117,16 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
     },
     imageRestaurant: {
-        resizeMode: 'contain',
-        width: '100%',
-        flexDirection: 'column',
+        resizeMode: 'cover',
+        width: "100%",
+        height: 200,
+        // flexDirection: 'column',
     },
     restName: {
         fontWeight: 'bold',
         fontSize: 18,
         flexDirection: 'column',
+        paddingTop: 10
     },
     restDesc: {
         fontSize: 12,

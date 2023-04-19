@@ -2,13 +2,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-
-const imageWelcome = require('../assets/welcome.png');
-const logo = require('../assets/logo.png');
-
-
-
 export function LoginScreen(props) {
+  const imageWelcome = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Fwelcome.png?alt=media&token=95f93ce5-989b-4dd6-a805-b8624a1711f3";
+  const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
+  
   const navigation = useNavigation();
 
   return (

@@ -6,8 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { AntDesign } from '@expo/vector-icons';
 
-const logo = require('../assets/logo.png');
-
+const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
 
 export function SignupScreen(props) {
     const [email, setEmail] = useState("")
