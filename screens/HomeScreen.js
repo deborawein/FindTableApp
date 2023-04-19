@@ -1,24 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect, useContext } from 'react';
-//context
-import { AuthContext } from '../context/AuthContext';
-//components
+//Components
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
+//context
+import { AuthContext } from '../context/AuthContext';
+import { RestaurantContext } from '../context/RestaurantContext';
 
 const imageRestaurant = require('../assets/restaurant.png');
 
 export function HomeScreen(props) {
     const navigation = useNavigation()
     const authStatus = useContext(AuthContext)
-
-    useEffect(() => {
-        if (!authStatus) {
-          navigation.reset({ index: 0, routes: [{ name: "Login" }] })
-        }
-        console.log(authStatus)
-      }, [authStatus])
+    const restData = useContext(RestaurantContext)
 
     const ListClickHandler = (data) => {
         navigation.navigate("Reserve", data)
@@ -54,13 +49,7 @@ export function HomeScreen(props) {
         <View>
             <Header />
             <Search />
-            {/* <TouchableOpacity style={styles.button} onPress={() => props.addData()}>
-                <Text style={styles.buttonText}>Add some data</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => props.signOutHandler()}>
-                <Text style={styles.buttonText}>Sign out</Text>
-            </TouchableOpacity> */}
-            <FlatList data={props.restaurantData}
+            <FlatList data={restData}
                 renderItem={({ item }) => (
                     <ListItem name={item.name} suburb={item.suburb} state={item.state} type={item.type} />
                 )}

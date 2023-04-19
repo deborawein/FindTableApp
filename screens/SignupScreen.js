@@ -1,9 +1,10 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { useEffect, useState, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 //React Navigation
 import { useNavigation } from "@react-navigation/native";
 //context
 import { AuthContext } from "../context/AuthContext";
+
 
 const logo = require('../assets/logo.png');
 const xmark = require('../assets/xmark.png');

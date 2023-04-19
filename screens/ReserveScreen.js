@@ -2,8 +2,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } fr
 import { useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
 //context
-import { AuthContext } from '../context/AuthContext';
-//components
+import { AuthContext } from "../context/AuthContext";
+
 import { TimeButton } from '../components/TimeButton';
 
 const imageRestaurant = require('../assets/restaurant.png');
@@ -12,13 +12,6 @@ const imageRestaurant = require('../assets/restaurant.png');
 
 export function ReserveScreen(props) {
     const authStatus = useContext(AuthContext)
-
-    useEffect(() => {
-        if (!authStatus) {
-          navigation.reset({ index: 0, routes: [{ name: "Login" }] })
-        }
-        console.log(authStatus)
-      }, [authStatus])
 
     const route = useRoute();
     const { id, name, type, suburb, state } = route.params
