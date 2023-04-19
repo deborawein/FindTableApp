@@ -9,6 +9,8 @@ import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
 import { SignupScreen } from './screens/SignupScreen';
 import { HomeTab } from './screens/HomeTab';
+//context
+import { AuthContext } from './context/AuthContext';
 //Firebase
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app'
