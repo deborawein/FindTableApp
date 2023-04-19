@@ -4,13 +4,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
+//context
+import { AuthContext } from './context/AuthContext';
 //screens
 import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
 import { SignupScreen } from './screens/SignupScreen';
 import { HomeTab } from './screens/HomeTab';
-//context
-import { AuthContext } from './context/AuthContext';
 //Firebase
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app'
@@ -21,10 +21,10 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth"
 
-const Stack = createNativeStackNavigator();
-
 const FBapp = initializeApp(firebaseConfig)
 const FBauth = getAuth(FBapp)
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [auth, setAuth] = useState()
@@ -52,31 +52,35 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-      // initialRouteName='Login'
-      >
-        <Stack.Screen
-          name='Login'
-          options={{ headerShown: false }}>
-          {(props) => <LoginScreen {...props} />}
+      <Stack.Navigator>
+      <Stack.Screen name='Login' options={{ headerShown: false }} >
+          {(props) => 
+          <LoginScreen {...props} />
+          }
         </Stack.Screen>
-        <Stack.Screen
-          name='Sign Up'
-          options={{ headerShown: false }}
-        >
-          {(props) => <SignupScreen {...props} handler={SignUp} authStatus={auth} />}
+
+      <Stack.Screen name='Sign Up' options={{ headerShown: false }} >
+          {(props) => 
+          <AuthContext.Provider value={auth}>
+          <SignupScreen {...props} handler={SignUp} />
+          </AuthContext.Provider>
+          }
         </Stack.Screen>
-        <Stack.Screen
-          name='Sign In'
-          options={{ headerShown: false }}>
-          {(props) => <SigninScreen {...props} handler={SignIn} authStatus={auth} />}
+
+        <Stack.Screen name='Sign In' options={{ headerShown: false }} >
+          {(props) => 
+          <AuthContext.Provider value={auth}>
+          <SigninScreen {...props} handler={SignIn} />
+          </AuthContext.Provider>
+          }
         </Stack.Screen>
-        <Stack.Screen
-          name='HomeTab'
-          options={{ headerShown: false }}>
-          {(props) => <HomeTab {...props} authStatus={auth}
-          //  add={AddData} 
-          />}
+
+        <Stack.Screen name='HomeTab' options={{ headerShown: false }} >
+          {(props) => 
+          <AuthContext.Provider value={auth}>
+          <HomeTab {...props} handler={'HomeTab'} />
+          // </AuthContext.Provider>
+          }
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
