@@ -1,7 +1,9 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } from 'react-native'
 import { useRoute } from '@react-navigation/native'
-import { useEffect, useState } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
+//context
+import { AuthContext } from '../context/AuthContext';
+//components
 import { TimeButton } from '../components/TimeButton';
 
 const imageRestaurant = require('../assets/restaurant.png');
@@ -9,29 +11,14 @@ const imageRestaurant = require('../assets/restaurant.png');
 
 
 export function ReserveScreen(props) {
-    // const [disabled, setDisabled] = useState(false)
+    const authStatus = useContext(AuthContext)
 
-    // useEffect(() => {
-    //     if (disabled) {
-    //         setDisabled(true)
-    //     }
-    //     else {
-    //         setDisabled(false)
-    //     }
-    // })
-
-    // const TimeButton = (props) => {
-    //     return (
-    //         <TouchableOpacity
-    //             style={(disabled) ? styles.timeButton : styles.timeButtonDisabled}
-    //             onPress={() => setDisabled(!disabled)}
-    //         >
-    //             <Text style={{ color: 'white', textAlign: 'center' }}> {props.time}</Text>
-    //         </TouchableOpacity>
-    //     )
-    // }
-
-
+    useEffect(() => {
+        if (!authStatus) {
+          navigation.reset({ index: 0, routes: [{ name: "Login" }] })
+        }
+        console.log(authStatus)
+      }, [authStatus])
 
     const route = useRoute();
     const { id, name, type, suburb, state } = route.params

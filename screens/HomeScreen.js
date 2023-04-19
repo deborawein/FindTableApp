@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
-
-//Components
+import { useState, useEffect, useContext } from 'react';
+//context
+import { AuthContext } from '../context/AuthContext';
+//components
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
 
@@ -10,6 +11,14 @@ const imageRestaurant = require('../assets/restaurant.png');
 
 export function HomeScreen(props) {
     const navigation = useNavigation()
+    const authStatus = useContext(AuthContext)
+
+    useEffect(() => {
+        if (!authStatus) {
+          navigation.reset({ index: 0, routes: [{ name: "Login" }] })
+        }
+        console.log(authStatus)
+      }, [authStatus])
 
     const ListClickHandler = (data) => {
         navigation.navigate("Reserve", data)

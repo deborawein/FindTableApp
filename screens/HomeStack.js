@@ -1,15 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native"
-import { useState, useEffect } from 'react'
-
-
+import { useState, useEffect, useContext } from 'react'
+//context
+import { AuthContext } from '../context/AuthContext';
+//screens
 import { HomeScreen } from './HomeScreen';
 import { ReserveScreen } from './ReserveScreen';
 
 //Firebase
 import { firebaseConfig } from '../config/Config';
 import { initializeApp } from 'firebase/app';
-import { 
+import {
   getFirestore,
   doc,
   setDoc,
@@ -29,9 +30,16 @@ const FBdb = getFirestore(FBapp)
 export function HomeStack(props) {
 
   const navigation = useNavigation()
+  const authStatus = useContext(AuthContext)
 
   const [restaurantData, setRestaurantData] = useState([])
 
+  useEffect(() => {
+    if (!authStatus) {
+      navigation.reset({ index: 0, routes: [{ name: "Login" }] })
+    }
+    console.log(authStatus)
+  }, [authStatus])
 
   useEffect(() => {
     if (restaurantData.length === 0) {

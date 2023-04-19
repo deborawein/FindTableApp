@@ -1,6 +1,9 @@
-import { View, Text, TouchableOpacity, Modal, TextInput, StyleSheet } from "react-native"
-import { useNavigation } from "@react-navigation/native"
-import { useState, useEffect } from 'react'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { useEffect, useState, useContext } from 'react'
+//React Navigation
+import { useNavigation } from "@react-navigation/native";
+//context
+import { AuthContext } from "../context/AuthContext";
 //React Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Screen
@@ -12,30 +15,27 @@ const Tab = createBottomTabNavigator();
 
 export function HomeTab(props) {
   const navigation = useNavigation()
+  const authStatus = useContext(AuthContext)
+
 
   useEffect(() => {
-    if (!props.authStatus) {
+    if (!authStatus) {
       navigation.reset({ index: 0, routes: [{ name: "Login" }] })
     }
-  }, [props.authStatus])
+    console.log(authStatus)
+  }, [authStatus])
 
   return (
 
     <Tab.Navigator id='TabNavigator'>
-      <Tab.Screen
-        name='HomeStack'
-        options={{
-          headerShown: false
-        }}
-      >
-        {(props) => <HomeStack {...props} />}
+      <Tab.Screen name='HomeStack' options={{ headerShown: false }} >
+        {(props) =>
+          // <AuthContext.Provider value={authStatus}>
+            <HomeStack {...props} />
+          // </AuthContext.Provider>
+        }
       </Tab.Screen>
-      <Tab.Screen
-        name='Bookings'
-        options={{
-          headerShown: false
-        }}
-      >
+      <Tab.Screen name='Bookings' options={{ headerShown: false }} >
         {(props) => <BookingsScreen {...props} />}
       </Tab.Screen>
     </Tab.Navigator>

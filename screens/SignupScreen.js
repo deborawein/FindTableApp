@@ -1,7 +1,9 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 //React Navigation
 import { useNavigation } from "@react-navigation/native";
+//context
+import { AuthContext } from "../context/AuthContext";
 
 const logo = require('../assets/logo.png');
 const xmark = require('../assets/xmark.png');
@@ -15,6 +17,7 @@ export function SignupScreen(props) {
     const [validForm, setValidForm] = useState(false)
 
     const navigation = useNavigation()
+    const authStatus = useContext(AuthContext)
 
     useEffect(() => {
         if (email.indexOf('@') > 0) {
@@ -44,13 +47,10 @@ export function SignupScreen(props) {
     })
 
     useEffect(() => {
-        if (props.authStatus) {
-            // navigate adds a back arrow to the header
-            // navigation.navigate("Home")
-            // reset will make "Home" the root page of the navigation
+        if (authStatus) {
             navigation.reset({ index: 0, routes: [{ name: "HomeTab" }] })
         }
-    }, [props.authStatus])
+    }, [authStatus])
 
     return (
         <View style={styles.page}>
