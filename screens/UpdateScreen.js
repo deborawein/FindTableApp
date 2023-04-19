@@ -9,26 +9,23 @@ import { DBContext } from '../context/DBContext';
 //firebase
 import { addDoc, collection } from 'firebase/firestore'
 
-
 const imageRestaurant = require('../assets/restaurant.png');
 
-
-
-export function ReserveScreen(props) {
+export function UpdateScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
-    const routeRest = useRoute();
+    const routeUpdate = useRoute();
     const navigation = useNavigation()
 
-    const { id, name, type, suburb, state } = routeRest.params
+    const { id, name, guest, date, time, firstname, lastname, phone } = routeUpdate.params
 
-    const [guest, setGuest] = useState('')
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
+    [guest, setGuest] = useState('')
+    [date, setDate] = useState('')
+    [time, setTime] = useState('')
 
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    const [phone, setPhone] = useState('')
+    [firstname, setFirstname] = useState('')
+    [lastname, setLastname] = useState('')
+    [phone, setPhone] = useState('')
 
 
     const saveReservation = async () => {
@@ -39,26 +36,24 @@ export function ReserveScreen(props) {
         navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
     }
 
-
     return (
         <View style={styles.page}>
             <Image source={imageRestaurant} style={styles.imageRestaurant} />
             <Text style={styles.restName}>{name}</Text>
-            <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
             <View style={styles.row}>
                 <View style={styles.leftBox}>
                     <Text style={styles.inputText}>Guests</Text>
                     <TextInput
                         style={styles.input}
                         value={guest}
-                        onChangeText={(val) => setGuest(val)}
+                        onChangeText={(val) => setGuestUp(val)}
                     />
                 </View>
                 <View style={styles.rightBox}>
                     <Text style={styles.inputText}>Date</Text>
                     <TextInput
                         style={styles.input}
-                        value={date}
+                        value={dateUp}
                         onChangeText={(val) => setDate(val)}
                     />
                 </View>

@@ -26,7 +26,11 @@ export function HomeScreen(props) {
                     onPress={
                         () => ListClickHandler(
                             {
-                                id: props.id, name: props.name, type: props.type, suburb: props.suburb, state: props.state
+                                id: props.id, 
+                                name: props.name, 
+                                type: props.type, 
+                                suburb: props.suburb, 
+                                state: props.state
                             }
                         )
                     }>

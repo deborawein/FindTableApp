@@ -16,20 +16,10 @@ export function HomeStack(props) {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name='Home'
-        options={{
-          headerShown: true
-        }}
-      >
+      <Stack.Screen name='Home' options={{headerShown: false }}>
         {(props) => <HomeScreen {...props} />}
       </Stack.Screen>
-      <Stack.Screen
-        name='Reserve'
-        options={{
-          headerShown: true
-        }}
-      >
+      <Stack.Screen name='Reserve' options={{headerShown: true}} >
         {(props) => <ReserveScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>

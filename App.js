@@ -118,10 +118,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Login' options={{ headerShown: true }}>
+        <Stack.Screen name='Login' options={{ headerShown: false }}>
           {(props) => <LoginScreen {...props} />}
         </Stack.Screen>
-        <Stack.Screen name='Sign Up' options={{ headerShown: true }}
+        <Stack.Screen name='Sign Up' options={{ headerShown: false }}
         >
           {(props) =>
             <AuthContext.Provider value={auth}>
@@ -129,14 +129,14 @@ export default function App() {
             </AuthContext.Provider>
           }
         </Stack.Screen>
-        <Stack.Screen name='Sign In' options={{ headerShown: true }}>
+        <Stack.Screen name='Sign In' options={{ headerShown: false }}>
           {(props) =>
             <AuthContext.Provider value={auth}>
               <SigninScreen {...props} handler={SignIn} />
             </AuthContext.Provider>
           }
         </Stack.Screen>
-        <Stack.Screen name='HomeTab' options={{ headerShown: true }}>
+        <Stack.Screen name='HomeTab' options={{ headerShown: false }}>
           {(props) =>
             <FBAuthContext.Provider value={FBauth} >
               <DBContext.Provider value={FBdb}>

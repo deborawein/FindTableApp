@@ -6,7 +6,6 @@ import { AuthContext } from '../context/AuthContext';
 import { ReservationContext } from '../context/ReservationContext';
 //incons
 import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const imageRestaurant = require('../assets/restaurant.png');
@@ -16,9 +15,9 @@ export function BookingsScreen(props) {
   const authStatus = useContext(AuthContext)
   const reserveData = useContext(ReservationContext)
 
-  // const ListClickHandler = (data) => {
-  //     navigation.navigate("Edit", data)
-  // }
+  const ListClickHandler = (data) => {
+    navigation.navigate("Info", data)
+  }
 
   const ListItem = (props) => {
     return (
@@ -27,24 +26,31 @@ export function BookingsScreen(props) {
           onPress={
             () => ListClickHandler(
               {
-                id: props.id, nameRest: props.nameRest, guest: props.guest, dateReserve: props.dateReserve
+                id: props.id, 
+                name: props.name, 
+                guest: props.guest, 
+                date: props.date,
+                time: props.time, 
+                firstname: props.firstname, 
+                lastname: props.lastname, 
+                phone: props.phone
               }
             )
           }
         >
           <View style={styles.container}>
             <Image source={imageRestaurant} style={styles.imageRestaurant} />
-            <Text style={styles.itemName}>{props.nameRest}</Text>
+            <Text style={styles.itemName}>{props.name}</Text>
           </View>
           <View style={styles.row}>
             <View style={styles.rowLeft}>
               <Text style={styles.itemLeft}>
-                <FontAwesome5 name="calendar-check" size={20} color="#FF707E" />  {props.dateReserve}
+                <FontAwesome5 name="calendar-check" size={20} color="#FF707E" />  {props.date} - {props.time}
               </Text>
             </View>
             <View style={styles.rowRight}>
               <Text style={styles.itemRight}>
-              <FontAwesome name="group" size={20} color="#FF707E" />  {props.guest} people
+                <FontAwesome name="group" size={20} color="#FF707E" />  {props.guest} people
               </Text>
             </View>
           </View>
@@ -64,12 +70,19 @@ export function BookingsScreen(props) {
     <View>
       <FlatList data={reserveData}
         renderItem={({ item }) => (
-          <ListItem nameRest={item.nameRest} dateReserve={item.dateReserve} guest={item.guest} />
+          <ListItem
+            name={item.name}
+            date={item.date}
+            guest={item.guest}
+            time={item.time}
+            firstname={item.firstname}
+            lastname={item.lastname}
+            phone={item.phone}
+          />
         )}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={ListItemSeparator}
       />
-
     </View>
   )
 }

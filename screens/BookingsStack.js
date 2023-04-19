@@ -5,6 +5,8 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from "../context/AuthContext";
 //screens
 import { BookingsScreen} from "./BookingsScreen"
+import { InfoScreen } from "./InfoScreen"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -15,8 +17,14 @@ export function BookingsStack(props) {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name='Bookings' options={{ headerShown: true }}>
+      <Stack.Screen name='Bookings' options={{ headerShown: false }}>
         {(props) => <BookingsScreen {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name='Info' options={{ headerShown: true }} >
+        {(props) => <InfoScreen {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name='Update' options={{ headerShown: true }} >
+        {(props) => <InfoScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
