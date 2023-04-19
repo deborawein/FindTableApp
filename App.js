@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 //context
 import { AuthContext } from './context/AuthContext';
 import { RestaurantContext } from './context/RestaurantContext';
+import { DBContext } from './context/DBContext';
+import { FBAuthContext } from './context/FBAuthContext';
 //screens
 import { LoginScreen } from './screens/LoginScreen';
 import { SigninScreen } from './screens/SigninScreen';
@@ -110,11 +112,15 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name='HomeTab' options={{ headerShown: false }}>
           {(props) =>
-            <AuthContext.Provider value={auth}>
-              <RestaurantContext.Provider value={restaurantData}>
-                <HomeTab {...props} />
-              </RestaurantContext.Provider>
-            </AuthContext.Provider>
+            <FBAuthContext.Provider value={FBauth} >
+              <DBContext.Provider value={FBdb}>
+                <AuthContext.Provider value={auth}>
+                  <RestaurantContext.Provider value={restaurantData}>
+                    <HomeTab {...props} />
+                  </RestaurantContext.Provider>
+                </AuthContext.Provider>
+              </DBContext.Provider>
+            </FBAuthContext.Provider>
           }
         </Stack.Screen>
       </Stack.Navigator>
