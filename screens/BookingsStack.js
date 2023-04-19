@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react'
 //context
 import { AuthContext } from "../context/AuthContext";
 //screens
-import { BookingsScreen } from './BookingsScreen';
+import { BookingsScreen} from "./BookingsScreen"
 
 const Stack = createNativeStackNavigator();
 

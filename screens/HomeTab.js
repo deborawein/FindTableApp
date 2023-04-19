@@ -10,6 +10,7 @@ import { BookingsStack } from "./BookingsStack";
 import { AuthContext } from "../context/AuthContext";
 //icon
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +44,7 @@ export function HomeTab(props) {
         options={{
           headerShown: true,
           tabBarLabel: 'Bookings',
-          tabBarIcon: ()=>( <Ionicons name="today" size={24} color="#FF707E" />)
+          tabBarIcon: ()=>( <FontAwesome5 name="calendar-check" size={24} color="#FF707E" />)
         }}>
         {(props) => <BookingsStack {...props} />}
       </Tab.Screen>
