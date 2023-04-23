@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
     },
     validInput: {
         backgroundColor: '#ffffff',
-        padding: 15,
+        padding: 10,
         borderWidth: 1,
         borderColor: "FF707E",
         borderRadius: 5,
         fontSize: 12,
-        marginHorizontal: 50,
+        marginHorizontal: 20,
     },
     inputText: {
         color: '#ff707e',
