@@ -40,10 +40,9 @@ export function HomeTab(props) {
       },
     }}>
       <Tab.Screen
-        name='HomeStack'
+        name='FInd Table'
         options={{
           headerShown: false,
-          tabBarLabel: 'Find Table',
           tabBarIcon: () => (
             <Ionicons name="restaurant" size={24} color="#FF707E" />
           )
@@ -52,7 +51,7 @@ export function HomeTab(props) {
         {(props) => <HomeStack {...props} />}
       </Tab.Screen>
       <Tab.Screen
-        name='BookingsStack'
+        name='Bookings'
         options={{
           headerShown: false,
           tabBarLabel: 'Bookings',
