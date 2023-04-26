@@ -1,7 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } from 'react-native'
-import { useRoute } from '@react-navigation/native'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
-import { useNavigation } from "@react-navigation/native";
 //components
 import { InfoListItem } from '../components/InfoListItem';
 //context
@@ -11,7 +10,7 @@ import { DBContext } from '../context/DBContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
-import { deleteDoc, doc, collection } from 'firebase/firestore'
+import { deleteDoc, doc, collection, updateDoc } from 'firebase/firestore'
 
 
 export function InfoScreen(props) {
@@ -27,11 +26,12 @@ export function InfoScreen(props) {
         navigation.navigate("Edit", data)
     }
 
-    const cancelReservation = () => {
+    const cancelReservation = async () => {
         const path = `users/${authStatus.uid}/reservations`
-        deleteDoc(doc(DB, `restaurants`, id))
-        console.log(path)
-    }
+        await deleteDoc(doc( DB, path, id ) )
+        navigation.goBack()
+      }
+
 
     return (
         <View>
@@ -61,10 +61,8 @@ export function InfoScreen(props) {
                 image={image}
                 handler={ListClickHandler}
             />
-            <TouchableOpacity style={styles.button}
-            // onPress={() => navigation.navigate('Delete')}
-            >
-                <Text style={styles.buttonText} onPress={() => cancelReservation}>CANCEL BOOKING</Text>
+            <TouchableOpacity style={styles.button} onPress={ () => cancelReservation() }>
+                <Text style={styles.buttonText} >CANCEL BOOKING</Text>
             </TouchableOpacity>
             {/* </View> */}
         </View>

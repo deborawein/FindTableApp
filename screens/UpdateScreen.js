@@ -7,14 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
 //firebase
-import { deleteDoc, doc, collection } from 'firebase/firestore'
+import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
 
 
 export function UpdateScreen(props) {
-    const authStatus = useContext(AuthContext)
-    const DB = useContext(DBContext)
-    const routeUpdate = useRoute();
     const navigation = useNavigation()
+    const authStatus = useContext( AuthContext )
+    const DB = useContext( DBContext )
+    const routeUpdate = useRoute();
 
     const { id, name, guest, date, time, firstname, lastname, phone, image } = routeUpdate.params
 
@@ -26,14 +26,11 @@ export function UpdateScreen(props) {
     const [lastnameUp, setLastnameUp] = useState(lastname)
     const [phoneUp, setPhoneUp] = useState(phone)
 
-
-    const saveReservation = async () => {
-        const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone }
-        //ad note to firebase
+    const updateReservation = async () => {
         const path = `users/${authStatus.uid}/reservations`
-        const ref = await addDoc(collection(DB, path), reservationObj)
-        navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
-    }
+        await updateDoc( doc( DB, path, id), {  guest: guestUp, date: dateUp, time: timeUp, firstname: firstnameUp, lastname: lastnameUp, phone: phoneUp } )
+        navigation.goBack()
+      }
 
 
 

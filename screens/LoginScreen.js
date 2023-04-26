@@ -25,9 +25,9 @@ export function LoginScreen(props) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.logoContainer}>
+      {/* <View style={styles.logoContainer}>
         <Image source={logo} style={styles.imageLogo} />
-      </View>
+      </View> */}
     </View>
 
 
