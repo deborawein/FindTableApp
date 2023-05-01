@@ -22,7 +22,7 @@ export function BookingsScreen(props) {
   }
   return (
 
-    <View>
+    <View style={{flex: 1}}>
       <Header />
       <FlatList style={ {backgroundColor: "#FFE7E9"}} data={reserveData}
         renderItem={({ item }) => (

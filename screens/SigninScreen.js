@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#FF707E',
         padding: 10,
-        marginHorizontal: 0,
+        marginHorizontal: 20,
         marginVertical: 15,
         borderRadius: 10,
     },
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     buttonDisabled: {
         backgroundColor: '#BFBFC1',
         padding: 10,
-        marginHorizontal: 0,
+        marginHorizontal: 20,
         marginVertical: 15,
         borderRadius: 10,
     },
