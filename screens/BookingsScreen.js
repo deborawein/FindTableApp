@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 //context
 import { AuthContext } from '../context/AuthContext';
 import { ReservationContext } from '../context/ReservationContext';
@@ -8,8 +8,6 @@ import { ReservationContext } from '../context/ReservationContext';
 import { ListItemSeparator } from '../components/ListItemSeparator';
 import { BookingListItem } from '../components/BookingListItem';
 import { Header } from '../components/Header';
-
-
 
 export function BookingsScreen(props) {
   const navigation = useNavigation()
@@ -21,10 +19,9 @@ export function BookingsScreen(props) {
     navigation.navigate("Booking Detail", data)
   }
   return (
-
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Header />
-      <FlatList style={ {backgroundColor: "#FFE7E9"}} data={reserveData}
+      <FlatList style={{ backgroundColor: "#FFE7E9" }} data={reserveData}
         renderItem={({ item }) => (
           <BookingListItem
             id={item.id}
@@ -45,10 +42,6 @@ export function BookingsScreen(props) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-
-})
 
 
 

@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 //components
 import { Header } from '../components/Header'
 import { Search } from '../components/Search';
@@ -22,25 +22,23 @@ export function HomeScreen(props) {
     }
 
     return (
-
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
             <Header />
             <Search />
             <FlatList data={restData}
                 renderItem={({ item }) => (
-                    <RestaurantListItem 
-                    name={item.name} 
-                    suburb={item.suburb}
-                    state={item.state} 
-                    type={item.type}
-                    image={item.image}
-                    handler={ListClickHandler}
+                    <RestaurantListItem
+                        name={item.name}
+                        suburb={item.suburb}
+                        state={item.state}
+                        type={item.type}
+                        image={item.image}
+                        handler={ListClickHandler}
                     />
                 )}
                 keyExtractor={item => item.id}
                 ItemSeparatorComponent={ListItemSeparator}
             />
-
         </View>
     )
 }

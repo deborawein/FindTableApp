@@ -1,5 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native-web"
-
+import { View, Text, Pressable, StyleSheet } from "react-native-web"
 
 export function InfoListItem(props) {
     const data = {

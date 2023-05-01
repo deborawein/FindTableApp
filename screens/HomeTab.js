@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity, Modal, TextInput, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 //React Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Screen
@@ -25,20 +24,19 @@ export function HomeTab(props) {
   }, [authStatus])
 
   return (
-
     <Tab.Navigator
-    screenOptions={{
-      tabBarActiveTintColor: "#FFA3AC",
-      tabBarInactiveTintColor: "#00043C",
-      tabBarStyle: {
-        backgroundColor: '#00043C',
-        height: 60
-      },
-      tabBarLabelStyle: {
-        fontSize: 12,
-        margin: 5,
-      },
-    }}>
+      screenOptions={{
+        tabBarActiveTintColor: "#FFA3AC",
+        tabBarInactiveTintColor: "#00043C",
+        tabBarStyle: {
+          backgroundColor: '#00043C',
+          height: 60
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          margin: 5,
+        },
+      }}>
       <Tab.Screen
         name='Find Table'
         options={{

@@ -1,13 +1,12 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable } from 'react-native'
 import { useRoute } from '@react-navigation/native'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
-
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
 //firebase
-import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 
 export function UpdateScreen(props) {
     const navigation = useNavigation()
@@ -32,8 +31,6 @@ export function UpdateScreen(props) {
         navigation.goBack()
     }
 
-
-
     return (
         <ScrollView>
             <View style={styles.page}>
@@ -56,7 +53,6 @@ export function UpdateScreen(props) {
                         />
                     </View>
                 </View>
-
                 <Text style={styles.inputText}>Booking Time</Text>
                 <TextInput
                     style={styles.input}
@@ -82,7 +78,6 @@ export function UpdateScreen(props) {
                         />
                     </View>
                 </View>
-
                 <Text style={styles.inputText}>Phone number</Text>
                 <TextInput
                     style={styles.input}
@@ -107,7 +102,6 @@ export function UpdateScreen(props) {
                                         setModalVisible(!modalVisible),
                                         navigation.goBack()
                                     ]}
-
                                 >
                                     <Text style={styles.buttonText}>NO</Text>
                                 </Pressable>
@@ -118,7 +112,6 @@ export function UpdateScreen(props) {
                                         updateReservation(),
                                         navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
                                     ]}
-
                                 >
                                     <Text style={styles.buttonText}>YES</Text>
                                 </Pressable>
@@ -126,11 +119,9 @@ export function UpdateScreen(props) {
                         </View>
                     </View>
                 </Modal>
-                <TouchableOpacity style={styles.button}
-                    onPress={() => [
-                        
-                        setModalVisible(true)
-                    ]}
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => setModalVisible(true)}
                 >
                     <Text style={styles.buttonText}>EDIT</Text>
                 </TouchableOpacity>

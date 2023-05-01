@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native"
-import { useState, useEffect, useContext } from 'react'
+import { useContext } from 'react'
 //context
 import { AuthContext } from "../context/AuthContext";
 //screens

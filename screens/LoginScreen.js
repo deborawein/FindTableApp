@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 export function LoginScreen(props) {
   const imageWelcome = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Fwelcome.png?alt=media&token=95f93ce5-989b-4dd6-a805-b8624a1711f3";
   const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
-  
+
   const navigation = useNavigation();
 
   return (
@@ -25,13 +25,10 @@ export function LoginScreen(props) {
           </TouchableOpacity>
         </View>
         <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.imageLogo} />
+          <Image source={logo} style={styles.imageLogo} />
+        </View>
       </View>
-      </View>
-      
     </View>
-
-
   )
 }
 
@@ -41,12 +38,10 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   imageContainer: {
-    //flex: 1,
     height: '40%',
     padding: 10,
   },
   mainContainer: {
-    //flex: 2,
     height: '60%',
     backgroundColor: '#00043C',
     borderTopStartRadius: 40,
@@ -57,8 +52,6 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   logoContainer: {
-    //flex: 1,
-    //height: '10%',
     paddingVertical: 60,
     backgroundColor: '#00043C',
     justifyContent: 'center'

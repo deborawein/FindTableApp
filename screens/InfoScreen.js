@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Modal, Pressable, ScrollView } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 //components
 import { InfoListItem } from '../components/InfoListItem';
 //context
@@ -10,8 +10,7 @@ import { DBContext } from '../context/DBContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
-import { deleteDoc, doc, collection, updateDoc } from 'firebase/firestore'
-
+import { deleteDoc, doc } from 'firebase/firestore'
 
 export function InfoScreen(props) {
     const authStatus = useContext(AuthContext)
@@ -19,7 +18,6 @@ export function InfoScreen(props) {
     const routeInfo = useRoute();
     const navigation = useNavigation()
     const [modalVisible, setModalVisible] = useState(false);
-
 
     const { id, name, guest, date, time, firstname, lastname, phone, image } = routeInfo.params
 
@@ -32,7 +30,6 @@ export function InfoScreen(props) {
         const path = `users/${authStatus.uid}/reservations`
         await deleteDoc(doc(DB, path, id))
     }
-
 
     return (
         <ScrollView>
@@ -62,7 +59,6 @@ export function InfoScreen(props) {
                     image={image}
                     handler={ListClickHandler}
                 />
-
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -91,7 +87,6 @@ export function InfoScreen(props) {
                                         cancelReservation(),
                                         navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
                                     ]}
-
                                 >
                                     <Text style={styles.buttonText}>YES</Text>
                                 </Pressable>
@@ -117,7 +112,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 20
     },
-
     titleBox: {
         flex: 1,
         padding: 10,
@@ -168,7 +162,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
-
     },
     modalView: {
         margin: 20,
@@ -189,5 +182,4 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
     },
-
 })

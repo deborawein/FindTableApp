@@ -1,8 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Modal, Alert, Pressable } from 'react-native'
 import { useRoute } from '@react-navigation/native'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
-
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
@@ -27,14 +26,12 @@ export function ReserveScreen(props) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-
     const saveReservation = async () => {
         const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone, image: image }
         //ad note to firebase
         const path = `users/${authStatus.uid}/reservations`
         const ref = await addDoc(collection(DB, path), reservationObj)
     }
-
 
     return (
         <ScrollView>
@@ -60,7 +57,6 @@ export function ReserveScreen(props) {
                         />
                     </View>
                 </View>
-
                 <Text style={styles.inputText}>Booking Time</Text>
                 <TextInput
                     style={styles.input}
@@ -106,11 +102,10 @@ export function ReserveScreen(props) {
                             <Pressable
                                 style={styles.button}
                                 onPress={() => [
-                                    setModalVisible(!modalVisible), 
+                                    setModalVisible(!modalVisible),
                                     navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
                                 ]}
-                                
-                                >
+                            >
                                 <Text style={styles.buttonText}>OK</Text>
                             </Pressable>
                         </View>
@@ -126,7 +121,6 @@ export function ReserveScreen(props) {
                 </TouchableOpacity>
             </View>
         </ScrollView>
-
     )
 }
 
@@ -213,15 +207,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
-          width: 0,
-          height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-      },
-      modalText: {
+    },
+    modalText: {
         marginBottom: 15,
         textAlign: 'center',
-      },
-    })
+    },
+})
