@@ -24,10 +24,11 @@ export function LoginScreen(props) {
             <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
           </TouchableOpacity>
         </View>
-      </View>
-      {/* <View style={styles.logoContainer}>
+        <View style={styles.logoContainer}>
         <Image source={logo} style={styles.imageLogo} />
-      </View> */}
+      </View>
+      </View>
+      
     </View>
 
 
@@ -37,14 +38,16 @@ export function LoginScreen(props) {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: '#FFFFFF',
-    flex: 1,
+    height: '100%',
   },
   imageContainer: {
-    flex: 2,
+    //flex: 1,
+    height: '40%',
     padding: 10,
   },
   mainContainer: {
-    flex: 2,
+    //flex: 2,
+    height: '60%',
     backgroundColor: '#00043C',
     borderTopStartRadius: 40,
     borderTopEndRadius: 40,
@@ -54,8 +57,9 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   logoContainer: {
-    flex: 1,
-    padding: 10,
+    //flex: 1,
+    //height: '10%',
+    paddingVertical: 60,
     backgroundColor: '#00043C',
     justifyContent: 'center'
   },

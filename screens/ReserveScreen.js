@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Modal, Alert, Pressable } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
@@ -25,79 +25,107 @@ export function ReserveScreen(props) {
     const [lastname, setLastname] = useState('')
     const [phone, setPhone] = useState('')
 
+    const [modalVisible, setModalVisible] = useState(false);
+
 
     const saveReservation = async () => {
         const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone, image: image }
         //ad note to firebase
         const path = `users/${authStatus.uid}/reservations`
         const ref = await addDoc(collection(DB, path), reservationObj)
-        navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
     }
 
 
     return (
-        <View style={styles.page}>
-            <Image source={image} style={styles.imageRestaurant} />
-            <Text style={styles.restName}>{name}</Text>
-            <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
-            <View style={styles.row}>
-                <View style={styles.leftBox}>
-                    <Text style={styles.inputText}>Guests</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={guest}
-                        onChangeText={(val) => setGuest(val)}
-                    />
+        <ScrollView>
+            <View style={styles.page}>
+                <Image source={image} style={styles.imageRestaurant} />
+                <Text style={styles.restName}>{name}</Text>
+                <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
+                <View style={styles.row}>
+                    <View style={styles.leftBox}>
+                        <Text style={styles.inputText}>Guests</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={guest}
+                            onChangeText={(val) => setGuest(val)}
+                        />
+                    </View>
+                    <View style={styles.rightBox}>
+                        <Text style={styles.inputText}>Date</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={date}
+                            onChangeText={(val) => setDate(val)}
+                        />
+                    </View>
                 </View>
-                <View style={styles.rightBox}>
-                    <Text style={styles.inputText}>Date</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={date}
-                        onChangeText={(val) => setDate(val)}
-                    />
+
+                <Text style={styles.inputText}>Booking Time</Text>
+                <TextInput
+                    style={styles.input}
+                    value={time}
+                    onChangeText={(val) => setTime(val)}
+                />
+                <Text style={styles.contact}>Contact Info</Text>
+                <View style={styles.row}>
+                    <View style={styles.leftBox}>
+                        <Text style={styles.inputText}>First name</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={firstname}
+                            onChangeText={(val) => setFirstname(val)}
+                        />
+                    </View>
+                    <View style={styles.rightBox}>
+                        <Text style={styles.inputText}>Last name</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={lastname}
+                            onChangeText={(val) => setLastname(val)}
+                        />
+                    </View>
                 </View>
+                <Text style={styles.inputText}>Phone number</Text>
+                <TextInput
+                    style={styles.input}
+                    value={phone}
+                    onChangeText={(val) => setPhone(val)}
+                />
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Booking accepted</Text>
+                            <Pressable
+                                style={styles.button}
+                                onPress={() => [
+                                    setModalVisible(!modalVisible), 
+                                    navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
+                                ]}
+                                
+                                >
+                                <Text style={styles.buttonText}>OK</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => [
+                        saveReservation(),
+                        setModalVisible(true)
+                    ]}
+                >
+                    <Text style={styles.buttonText}>RESERVE</Text>
+                </TouchableOpacity>
             </View>
-
-            <Text style={styles.inputText}>Booking Time</Text>
-            <TextInput
-                style={styles.input}
-                value={time}
-                onChangeText={(val) => setTime(val)}
-            />
-            <Text style={styles.contact}>Contact Info</Text>
-            <View style={styles.row}>
-                <View style={styles.leftBox}>
-                    <Text style={styles.inputText}>First name</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={firstname}
-                        onChangeText={(val) => setFirstname(val)}
-                    />
-                </View>
-                <View style={styles.rightBox}>
-                    <Text style={styles.inputText}>Last name</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={lastname}
-                        onChangeText={(val) => setLastname(val)}
-                    />
-                </View>
-            </View>
-
-            <Text style={styles.inputText}>Phone number</Text>
-            <TextInput
-                style={styles.input}
-                value={phone}
-                onChangeText={(val) => setPhone(val)}
-            />
-
-            <TouchableOpacity style={styles.button}
-            onPress={() => saveReservation()}
-            >
-                <Text style={styles.buttonText}>RESERVE</Text>
-            </TouchableOpacity>
-        </View>
+        </ScrollView>
 
     )
 }
@@ -105,11 +133,10 @@ export function ReserveScreen(props) {
 const styles = StyleSheet.create({
     page: {
         marginHorizontal: 20,
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        // alignItems: "center",
-        paddingVertical: 20
     },
     row: {
         display: 'flex',
@@ -120,7 +147,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         width: "100%",
         height: 200,
-        // flexDirection: 'column',
     },
     restName: {
         fontWeight: 'bold',
@@ -173,4 +199,29 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: 'bold',
     },
-})
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
+    })

@@ -23,7 +23,7 @@ export function HomeScreen(props) {
 
     return (
 
-        <View>
+        <View style={{flex: 1}}>
             <Header />
             <Search />
             <FlatList data={restData}

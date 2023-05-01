@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         marginHorizontal: 20,
-        display: 'flex'
+        //display: 'flex'
     },
     input: {
         backgroundColor: '#ffffff',

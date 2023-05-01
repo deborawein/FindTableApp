@@ -40,7 +40,7 @@ export function HomeTab(props) {
       },
     }}>
       <Tab.Screen
-        name='FInd Table'
+        name='Find Table'
         options={{
           headerShown: false,
           tabBarIcon: () => (

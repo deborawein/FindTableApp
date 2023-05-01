@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#00043C',
     height: 65,
-    display: 'flex',
+    //display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: "center",
@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
   logoImage: {
     resizeMode: 'contain',
     height: '60%',
-    flex: 2,
+    width: '90%',
+    //flex: 2,
     alignSelf: 'center',
 
   },
   signOutButton: {
-    flex: 1,
+    //flex: 1,
+    width: '10%'
  
     }
 })
