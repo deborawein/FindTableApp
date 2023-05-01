@@ -1,4 +1,5 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native-web"
+import { View, Text, Pressable, StyleSheet, Image } from "react-native"
+
 
 export function RestaurantListItem(props) {
     const data = {
