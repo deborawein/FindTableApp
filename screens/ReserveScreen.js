@@ -106,7 +106,7 @@ export function ReserveScreen(props) {
                                 style={styles.button}
                                 onPress={() => [
                                     setModalVisible(!modalVisible),
-                                    navigation.navigate("Bookings")
+                                    navigation.navigate("Home")
                                 ]}
                             >
                                 <Text style={styles.buttonText}>OK</Text>
