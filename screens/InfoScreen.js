@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Alert, Modal, Pressable, ScrollView, SafeAreaView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Modal, Pressable, ScrollView, SafeAreaView } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { Image } from 'expo-image';
@@ -69,7 +69,6 @@ export function InfoScreen(props) {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
                         setModalVisible(!modalVisible);
                     }}>
                     <View style={styles.centeredView}>

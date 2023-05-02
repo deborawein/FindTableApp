@@ -1,6 +1,6 @@
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useContext } from 'react';
+import { useContext, Fragment } from 'react';
 //context
 import { AuthContext } from '../context/AuthContext';
 import { ReservationContext } from '../context/ReservationContext';
@@ -18,27 +18,31 @@ export function BookingsScreen(props) {
     navigation.navigate("Booking Detail", data)
   }
   return (
-        <SafeAreaView style={{ flex: 1 }}>
-          <Header />
-          <FlatList data={reserveData}
-            renderItem={({ item }) => (
-              <BookingListItem
-                id={item.id}
-                name={item.name}
-                date={item.date}
-                guest={item.guest}
-                time={item.time}
-                firstname={item.firstname}
-                lastname={item.lastname}
-                phone={item.phone}
-                image={item.image}
-                handler={ListClickHandler}
-              />
-            )}
-            keyExtractor={item => item.id}
-            ItemSeparatorComponent={ListItemSeparator}
-          />
+    <Fragment>
+      <SafeAreaView style={{ flex: 0, backgroundColor: '#00043C' }}></SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar barStyle="light-content" />
+        <Header />
+        <FlatList data={reserveData}
+          renderItem={({ item }) => (
+            <BookingListItem
+              id={item.id}
+              name={item.name}
+              date={item.date}
+              guest={item.guest}
+              time={item.time}
+              firstname={item.firstname}
+              lastname={item.lastname}
+              phone={item.phone}
+              image={item.image}
+              handler={ListClickHandler}
+            />
+          )}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={ListItemSeparator}
+        />
       </SafeAreaView>
+    </Fragment>
   )
 }
 

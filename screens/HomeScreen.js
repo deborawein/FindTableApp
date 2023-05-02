@@ -1,6 +1,6 @@
-import { StyleSheet, View, FlatList, TextInput, SafeAreaView } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, SafeAreaView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 //components
 import { Header } from '../components/Header'
 import { RestaurantListItem } from '../components/RestaurantListItem';
@@ -39,31 +39,35 @@ export function HomeScreen(props) {
     }
 
     return (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <Header />
-                    <FlatList data={filterItems(restData, search)}
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id}
-                        ItemSeparatorComponent={ListItemSeparator}
-                        ListHeaderComponent={
-                            <View style={styles.containerSearch}>
-                                <View style={styles.searchSection}>
-                                    <FontAwesome
-                                        style={styles.searchIcon}
-                                        name="search"
-                                        size={20}
-                                        color="#FF707E"
-                                    />
-                                    <TextInput style={styles.input}
-                                        placeholder='Search restaurant...'
-                                        onChangeText={query => setSearch(query)}
-                                        value={search}
-                                    />
-                                </View>
+        <Fragment>
+            <StatusBar barStyle="light-content" />
+            <SafeAreaView style={{ flex: 0, backgroundColor: '#00043C' }}></SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
+                <Header />
+                <FlatList data={filterItems(restData, search)}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    ItemSeparatorComponent={ListItemSeparator}
+                    ListHeaderComponent={
+                        <View style={styles.containerSearch}>
+                            <View style={styles.searchSection}>
+                                <FontAwesome
+                                    style={styles.searchIcon}
+                                    name="search"
+                                    size={20}
+                                    color="#FF707E"
+                                />
+                                <TextInput style={styles.input}
+                                    placeholder='Search restaurant...'
+                                    onChangeText={query => setSearch(query)}
+                                    value={search}
+                                />
                             </View>
-                        }
-                    />
-                </SafeAreaView>
+                        </View>
+                    }
+                />
+            </SafeAreaView>
+        </Fragment>
     )
 }
 

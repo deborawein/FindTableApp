@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { useContext, useEffect, useState } from 'react'
 import { Image } from 'expo-image';
 //React Navigation
@@ -9,7 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 import { AntDesign } from '@expo/vector-icons';
 
 export function SignupScreen(props) {
-    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753" ;
+    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
 
     const [email, setEmail] = useState("")
     const [validEmail, setValidEmail] = useState(false)
@@ -54,49 +54,50 @@ export function SignupScreen(props) {
     }, [authStatus])
 
     return (
-        
-            <SafeAreaView style={styles.page}>
-                <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
-                    <AntDesign name="closecircle" size={24} color="#FF707E" />
-                </TouchableOpacity>
-                <View style={styles.containerImage}>
-                    <Image source={logo} style={styles.imageLogo} />
+
+        <SafeAreaView style={styles.page}>
+            <StatusBar barStyle="light-content" />
+            <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
+                <AntDesign name="closecircle" size={24} color="#FF707E" />
+            </TouchableOpacity>
+            <View style={styles.containerImage}>
+                <Image source={logo} style={styles.imageLogo} />
+            </View>
+            <View>
+                <Text style={styles.titleText}>Register Here</Text>
+                <Text style={styles.inputText}>Email</Text>
+                <TextInput
+                    style={(validEmail) ? styles.validInput : styles.input}
+                    placeholder="you@domain.com"
+                    value={email}
+                    onChangeText={(emailText) => setEmail(emailText)}
+                />
+                <Text style={styles.inputText}>Password</Text>
+                <TextInput
+                    style={(validPassword) ? styles.validInput : styles.input}
+                    placeholder="minimum 8 characters"
+                    value={password}
+                    onChangeText={(pwText) => setPassword(pwText)}
+                    secureTextEntry={true}
+                />
+                <View style={styles.buttonBox}>
+                    <TouchableOpacity
+                        style={(validForm) ? styles.button : styles.buttonDisabled}
+                        disabled={(validForm) ? false : true}
+                        onPress={() => props.handler(email, password)}
+                    >
+                        <Text style={styles.buttonText}>REGISTER</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Sign In')}
+                    >
+                        <Text style={styles.signinText}>
+                            Already have an account? Sign in here.</Text>
+                    </TouchableOpacity>
                 </View>
-                <View>
-                    <Text style={styles.titleText}>Register Here</Text>
-                    <Text style={styles.inputText}>Email</Text>
-                    <TextInput
-                        style={(validEmail) ? styles.validInput : styles.input}
-                        placeholder="you@domain.com"
-                        value={email}
-                        onChangeText={(emailText) => setEmail(emailText)}
-                    />
-                    <Text style={styles.inputText}>Password</Text>
-                    <TextInput
-                        style={(validPassword) ? styles.validInput : styles.input}
-                        placeholder="minimum 8 characters"
-                        value={password}
-                        onChangeText={(pwText) => setPassword(pwText)}
-                        secureTextEntry={true}
-                    />
-                    <View style={styles.buttonBox}>
-                        <TouchableOpacity
-                            style={(validForm) ? styles.button : styles.buttonDisabled}
-                            disabled={(validForm) ? false : true}
-                            onPress={() => props.handler(email, password)}
-                        >
-                            <Text style={styles.buttonText}>REGISTER</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Sign In')}
-                        >
-                            <Text style={styles.signinText}>
-                                Already have an account? Sign in here.</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </SafeAreaView>
-        
+            </View>
+        </SafeAreaView>
+
     )
 }
 
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     input: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FFFFFF',
         padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     validInput: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FFFFFF',
         padding: 15,
         borderWidth: 1,
         borderColor: "FF707E",
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     inputText: {
-        color: '#ff707e',
+        color: '#FF707E',
         fontSize: 14,
         marginHorizontal: 20,
         marginTop: 10,

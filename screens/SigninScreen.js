@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { useEffect, useState, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Image } from 'expo-image';
@@ -57,6 +57,7 @@ export function SigninScreen(props) {
 
     return (
         <SafeAreaView style={styles.page}>
+            <StatusBar barStyle="light-content" />
             <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
                 <AntDesign name="closecircle" size={24} color="#FF707E" />
             </TouchableOpacity>
@@ -89,11 +90,11 @@ export function SigninScreen(props) {
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                            onPress={() => navigation.navigate('Sign Up')}
-                        >
-                            <Text style={styles.signinText}>
-                                Don't have an account? Register here.</Text>
-                        </TouchableOpacity>
+                        onPress={() => navigation.navigate('Sign Up')}
+                    >
+                        <Text style={styles.signinText}>
+                            Don't have an account? Register here.</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView >

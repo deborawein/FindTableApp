@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Pressable, SafeAreaView } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
@@ -108,7 +108,7 @@ export function ReserveScreen(props) {
                                 style={styles.button}
                                 onPress={() => [
                                     setModalVisible(!modalVisible),
-                                    navigation.navigate("BookingsStack")
+                                    navigation.navigate("Bookings")
                                 ]}
                             >
                                 <Text style={styles.buttonText}>OK</Text>
