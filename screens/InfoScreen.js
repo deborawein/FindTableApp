@@ -19,7 +19,7 @@ export function InfoScreen(props) {
     const DB = useContext(DBContext)
     const reserveData = useContext(ReservationContext)
 
-    
+
     const routeInfo = useRoute();
     const navigation = useNavigation()
     const [modalVisible, setModalVisible] = useState(false);
@@ -36,9 +36,9 @@ export function InfoScreen(props) {
     }
 
     return (
-        <SafeAreaView style={styles.page}>
-            <ScrollView>
-            <Image source={image} style={styles.imageRestaurant} />
+        <ScrollView>
+            <SafeAreaView style={styles.page}>
+                <Image source={image} style={styles.imageRestaurant} />
                 <View style={styles.titleBox}>
                     <Text style={styles.title}>Reservation</Text>
                     <Text style={styles.restaurant}>{name}</Text>
@@ -104,14 +104,15 @@ export function InfoScreen(props) {
                 ]}>
                     <Text style={styles.buttonText} >CANCEL BOOKING</Text>
                 </TouchableOpacity>
-                </ScrollView>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ScrollView>
+
     )
 }
 
 const styles = StyleSheet.create({
     page: {
-        
+
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     },
     contactText: {
         fontSize: 14,
-        
+
     },
     buttonBox: {
         padding: 10,

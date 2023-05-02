@@ -33,10 +33,10 @@ export function UpdateScreen(props) {
     }
 
     return (
+        <ScrollView>
 
-        <SafeAreaView style={styles.page}>
-            <ScrollView>
-            <Image source={image} style={styles.imageRestaurant} />
+            <SafeAreaView style={styles.page}>
+                <Image source={image} style={styles.imageRestaurant} />
                 <Text style={styles.restName}>{name}</Text>
                 <View style={styles.row}>
                     <View style={styles.leftBox}>
@@ -57,12 +57,12 @@ export function UpdateScreen(props) {
                     </View>
                 </View>
                 <View style={styles.rowLong}>
-                <Text style={styles.inputText}>Booking Time</Text>
-                <TextInput
-                    style={styles.input}
-                    value={timeUp}
-                    onChangeText={(val) => setTimeUp(val)}
-                />
+                    <Text style={styles.inputText}>Booking Time</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={timeUp}
+                        onChangeText={(val) => setTimeUp(val)}
+                    />
                 </View>
                 <Text style={styles.contact}>Contact Info</Text>
                 <View style={styles.row}>
@@ -84,12 +84,12 @@ export function UpdateScreen(props) {
                     </View>
                 </View>
                 <View style={styles.rowLong}>
-                <Text style={styles.inputText}>Phone number</Text>
-                <TextInput
-                    style={styles.input}
-                    value={phoneUp}
-                    onChangeText={(val) => setPhoneUp(val)}
-                />
+                    <Text style={styles.inputText}>Phone number</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={phoneUp}
+                        onChangeText={(val) => setPhoneUp(val)}
+                    />
                 </View>
                 <Modal
                     animationType="slide"
@@ -132,8 +132,9 @@ export function UpdateScreen(props) {
                 >
                     <Text style={styles.buttonText}>EDIT</Text>
                 </TouchableOpacity>
-            </ScrollView>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ScrollView>
+
 
 
     )
