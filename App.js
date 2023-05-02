@@ -72,7 +72,7 @@ export default function App() {
 
   const SignUp = (email, password) => {
     createUserWithEmailAndPassword(FBauth, email, password)
-      .then((userCredential) => console.log(userCredential))
+      .then((userCredential) => (console.log(userCredential)))
       .catch((error) => console.log(error))
   }
 
@@ -88,12 +88,10 @@ export default function App() {
     const unsubscribe = onSnapshot(dataQuery, (querySnapshot) => {
       let restaurants = []
       querySnapshot.forEach((doc) => {
-        // console.log(doc.data().name)
         let item = doc.data()
         item.id = doc.id
         restaurants.push(item)
       })
-      console.log(restaurants)
       setRestaurantData(restaurants)
     })
   }
@@ -109,8 +107,6 @@ export default function App() {
         item.id = reserve.id
         reservations.push(item)
       })
-      console.log(reservations)
-
       setReservationData(reservations)
     })
   }

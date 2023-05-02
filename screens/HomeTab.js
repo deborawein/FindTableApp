@@ -30,7 +30,7 @@ export function HomeTab(props) {
         tabBarInactiveTintColor: "#00043C",
         tabBarStyle: {
           backgroundColor: '#00043C',
-          height: 60
+          height: 90
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -38,9 +38,10 @@ export function HomeTab(props) {
         },
       }}>
       <Tab.Screen
-        name='Find Table'
+        name='HomeStack'
         options={{
           headerShown: false,
+          tabBarLabel: 'Find Table',
           tabBarIcon: () => (
             <Ionicons name="restaurant" size={24} color="#FF707E" />
           )
@@ -49,7 +50,7 @@ export function HomeTab(props) {
         {(props) => <HomeStack {...props} />}
       </Tab.Screen>
       <Tab.Screen
-        name='Bookings'
+        name='BookingsStack'
         options={{
           headerShown: false,
           tabBarLabel: 'Bookings',

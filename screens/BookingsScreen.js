@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { View, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 //context
@@ -15,31 +15,34 @@ export function BookingsScreen(props) {
   const reserveData = useContext(ReservationContext)
 
   const ListClickHandler = (data) => {
-    console.log(data)
     navigation.navigate("Booking Detail", data)
   }
   return (
-    <View style={{ flex: 1 }}>
-      <Header />
-      <FlatList style={{ backgroundColor: "#FFE7E9" }} data={reserveData}
-        renderItem={({ item }) => (
-          <BookingListItem
-            id={item.id}
-            name={item.name}
-            date={item.date}
-            guest={item.guest}
-            time={item.time}
-            firstname={item.firstname}
-            lastname={item.lastname}
-            phone={item.phone}
-            image={item.image}
-            handler={ListClickHandler}
+    <ScrollView>
+      <SafeAreaView>
+        <View style={{ flex: 1 }}>
+          <Header />
+          <FlatList style={{ backgroundColor: "#FFE7E9" }} data={reserveData}
+            renderItem={({ item }) => (
+              <BookingListItem
+                id={item.id}
+                name={item.name}
+                date={item.date}
+                guest={item.guest}
+                time={item.time}
+                firstname={item.firstname}
+                lastname={item.lastname}
+                phone={item.phone}
+                image={item.image}
+                handler={ListClickHandler}
+              />
+            )}
+            keyExtractor={item => item.id}
+            ItemSeparatorComponent={ListItemSeparator}
           />
-        )}
-        keyExtractor={item => item.id}
-        ItemSeparatorComponent={ListItemSeparator}
-      />
-    </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 

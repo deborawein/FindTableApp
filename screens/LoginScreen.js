@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export function LoginScreen(props) {
@@ -9,26 +9,28 @@ export function LoginScreen(props) {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.page}>
-      <View style={styles.imageContainer}>
-        <Image source={imageWelcome} style={styles.imageWelcome} />
-      </View>
-      <View style={styles.mainContainer}>
-        <View style={styles.buttonBox}>
+    
+      <SafeAreaView style={styles.page}>
+        <View style={styles.imageContainer}>
+          <Image source={imageWelcome} style={styles.imageWelcome} />
+        </View>
+        <View style={styles.mainContainer}>
+          <View style={styles.buttonBox}>
 
-          <Text style={styles.welcomeText}>Let's have dinner?!</Text>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
-            <Text style={styles.buttonText}>LOGIN</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
-            <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
-          </TouchableOpacity>
+            <Text style={styles.welcomeText}>Let's have dinner?!</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
+              <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.logoContainer}>
+            <Image source={logo} style={styles.imageLogo} />
+          </View>
         </View>
-        <View style={styles.logoContainer}>
-          <Image source={logo} style={styles.imageLogo} />
-        </View>
-      </View>
-    </View>
+      </SafeAreaView>
+   
   )
 }
 

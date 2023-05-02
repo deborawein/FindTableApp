@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Modal, Alert, Pressable } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
@@ -35,7 +35,7 @@ export function ReserveScreen(props) {
 
     return (
         <ScrollView>
-            <View style={styles.page}>
+            <SafeAreaView style={styles.page}>
                 <Image source={image} style={styles.imageRestaurant} />
                 <Text style={styles.restName}>{name}</Text>
                 <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
@@ -119,8 +119,9 @@ export function ReserveScreen(props) {
                 >
                     <Text style={styles.buttonText}>RESERVE</Text>
                 </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </SafeAreaView>
+            </ScrollView>
+
     )
 }
 

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Alert, Modal, Pressable, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Modal, Pressable, ScrollView, SafeAreaView } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 //components
@@ -22,7 +22,6 @@ export function InfoScreen(props) {
     const { id, name, guest, date, time, firstname, lastname, phone, image } = routeInfo.params
 
     const ListClickHandler = (data) => {
-        console.log(data)
         navigation.navigate("Edit", data)
     }
 
@@ -32,8 +31,8 @@ export function InfoScreen(props) {
     }
 
     return (
-        <ScrollView>
-            <View style={styles.page}>
+        <SafeAreaView style={styles.page}>
+            <ScrollView>
                 <View style={styles.titleBox}>
                     <Text style={styles.title}>Reservation</Text>
                     <Text style={styles.restaurant}>{name}</Text>
@@ -99,8 +98,8 @@ export function InfoScreen(props) {
                 ]}>
                     <Text style={styles.buttonText} >CANCEL BOOKING</Text>
                 </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 

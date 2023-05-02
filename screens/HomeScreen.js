@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useState } from 'react';
 //components
@@ -21,7 +21,6 @@ export function HomeScreen(props) {
     const [search, setSearch] = useState('');
 
     const ListClickHandler = (data) => {
-        console.log(data)
         navigation.navigate("Reservation", data)
     }
 
@@ -40,31 +39,35 @@ export function HomeScreen(props) {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <Header />
-            <FlatList data={filterItems(restData, search)}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                ItemSeparatorComponent={ListItemSeparator}
-                ListHeaderComponent={
-                    <View style={styles.containerSearch}>
-                      <View style={styles.searchSection}>
-                        <FontAwesome
-                          style={styles.searchIcon}
-                          name="search"
-                          size={20}
-                          color="#FF707E"
-                        />
-                        <TextInput style={styles.input}
-                          placeholder='Search restaurant...'
-                          onChangeText={query => setSearch(query)}
-                          value={search}
-                        />
-                      </View>
-                    </View>
-                  }
-            />
-        </View>
+        <ScrollView>
+            <SafeAreaView>
+                <View style={{ flex: 1 }}>
+                    <Header />
+                    <FlatList data={filterItems(restData, search)}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        ItemSeparatorComponent={ListItemSeparator}
+                        ListHeaderComponent={
+                            <View style={styles.containerSearch}>
+                                <View style={styles.searchSection}>
+                                    <FontAwesome
+                                        style={styles.searchIcon}
+                                        name="search"
+                                        size={20}
+                                        color="#FF707E"
+                                    />
+                                    <TextInput style={styles.input}
+                                        placeholder='Search restaurant...'
+                                        onChangeText={query => setSearch(query)}
+                                        value={search}
+                                    />
+                                </View>
+                            </View>
+                        }
+                    />
+                </View>
+            </SafeAreaView>
+        </ScrollView>
     )
 }
 

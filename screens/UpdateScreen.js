@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
@@ -32,8 +32,9 @@ export function UpdateScreen(props) {
     }
 
     return (
-        <ScrollView>
-            <View style={styles.page}>
+
+        <SafeAreaView style={styles.page}>
+            <ScrollView>
                 <Text style={styles.restName}>{name}</Text>
                 <View style={styles.row}>
                     <View style={styles.leftBox}>
@@ -125,8 +126,9 @@ export function UpdateScreen(props) {
                 >
                     <Text style={styles.buttonText}>EDIT</Text>
                 </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
+
 
     )
 }

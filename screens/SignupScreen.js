@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, SafeAreaView } from "react-native";
 import { useContext, useEffect, useState } from 'react'
 //React Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -52,8 +52,9 @@ export function SignupScreen(props) {
     }, [authStatus])
 
     return (
-        <ScrollView>
-            <View style={styles.page}>
+        
+            <SafeAreaView style={styles.page}>
+                <ScrollView>
                 <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
                     <AntDesign name="closecircle" size={24} color="#FF707E" />
                 </TouchableOpacity>
@@ -94,8 +95,9 @@ export function SignupScreen(props) {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
-        </ScrollView>
+                </ScrollView>
+            </SafeAreaView>
+        
     )
 }
 
