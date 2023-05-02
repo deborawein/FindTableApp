@@ -2,13 +2,10 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Stat
 import { useEffect, useState, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Image } from 'expo-image';
-
 //context
 import { AuthContext } from "../context/AuthContext";
 //icon
 import { AntDesign } from '@expo/vector-icons';
-
-
 
 export function SigninScreen(props) {
     const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753"

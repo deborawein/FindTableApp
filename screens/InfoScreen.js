@@ -7,7 +7,6 @@ import { EditButton } from '../components/EditButton';
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
-import { ReservationContext } from '../context/ReservationContext';
 //incons
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -17,8 +16,6 @@ import { deleteDoc, doc } from 'firebase/firestore'
 export function InfoScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
-    const reserveData = useContext(ReservationContext)
-
 
     const routeInfo = useRoute();
     const navigation = useNavigation()

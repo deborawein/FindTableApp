@@ -22,18 +22,13 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
   signInWithEmailAndPassword
 } from "firebase/auth"
 
 import {
   getFirestore,
-  doc,
-  setDoc,
-  addDoc,
   collection,
   query,
-  where,
   onSnapshot
 } from 'firebase/firestore'
 

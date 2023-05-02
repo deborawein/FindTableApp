@@ -3,7 +3,6 @@ import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Image } from 'expo-image';
-
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
@@ -30,7 +29,6 @@ export function ReserveScreen(props) {
 
     const saveReservation = async () => {
         const reservationObj = { name: name, guest: guest, date: date, time: time, firstname: firstname, lastname: lastname, phone: phone, image: image }
-        //ad note to firebase
         const path = `users/${authStatus.uid}/reservations`
         const ref = await addDoc(collection(DB, path), reservationObj)
     }

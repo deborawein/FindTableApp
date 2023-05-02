@@ -6,7 +6,6 @@ import { Header } from '../components/Header'
 import { RestaurantListItem } from '../components/RestaurantListItem';
 import { ListItemSeparator } from "../components/ListItemSeparator"
 //context
-import { AuthContext } from '../context/AuthContext';
 import { RestaurantContext } from '../context/RestaurantContext';
 //icon
 import { FontAwesome } from '@expo/vector-icons';
@@ -15,7 +14,6 @@ import { FontAwesome } from '@expo/vector-icons';
 export function HomeScreen(props) {
 
     const navigation = useNavigation()
-    const authStatus = useContext(AuthContext)
     const restData = useContext(RestaurantContext)
 
     const [search, setSearch] = useState('');

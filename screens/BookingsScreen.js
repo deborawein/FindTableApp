@@ -2,7 +2,6 @@ import { FlatList, SafeAreaView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, Fragment } from 'react';
 //context
-import { AuthContext } from '../context/AuthContext';
 import { ReservationContext } from '../context/ReservationContext';
 //components
 import { ListItemSeparator } from '../components/ListItemSeparator';
@@ -11,7 +10,6 @@ import { Header } from '../components/Header';
 
 export function BookingsScreen(props) {
   const navigation = useNavigation()
-  const authStatus = useContext(AuthContext)
   const reserveData = useContext(ReservationContext)
 
   const ListClickHandler = (data) => {

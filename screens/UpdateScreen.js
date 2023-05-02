@@ -2,7 +2,6 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal,
 import { useContext, useState } from 'react'
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Image } from 'expo-image';
-
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
