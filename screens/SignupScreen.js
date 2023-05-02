@@ -1,13 +1,15 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import { useContext, useEffect, useState } from 'react'
+import { Image } from 'expo-image';
 //React Navigation
 import { useNavigation } from "@react-navigation/native";
 //context
 import { AuthContext } from "../context/AuthContext";
+//icon
 import { AntDesign } from '@expo/vector-icons';
 
 export function SignupScreen(props) {
-    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
+    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753" ;
 
     const [email, setEmail] = useState("")
     const [validEmail, setValidEmail] = useState(false)
@@ -54,14 +56,13 @@ export function SignupScreen(props) {
     return (
         
             <SafeAreaView style={styles.page}>
-                <ScrollView>
                 <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
                     <AntDesign name="closecircle" size={24} color="#FF707E" />
                 </TouchableOpacity>
                 <View style={styles.containerImage}>
                     <Image source={logo} style={styles.imageLogo} />
                 </View>
-                <View style={styles.containerLogin}>
+                <View>
                     <Text style={styles.titleText}>Register Here</Text>
                     <Text style={styles.inputText}>Email</Text>
                     <TextInput
@@ -87,7 +88,6 @@ export function SignupScreen(props) {
                             <Text style={styles.buttonText}>REGISTER</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={styles.containerSignin}
                             onPress={() => navigation.navigate('Sign In')}
                         >
                             <Text style={styles.signinText}>
@@ -95,7 +95,6 @@ export function SignupScreen(props) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                </ScrollView>
             </SafeAreaView>
         
     )
@@ -107,32 +106,26 @@ const styles = StyleSheet.create({
         backgroundColor: '#00043C',
     },
     containerImage: {
-        flex: 1,
+        paddingVertical: 50,
         justifyContent: 'center'
     },
-    containerLogin: {
-        flex: 2,
-    },
-    containerSignin: {
-        flex: 1,
-    },
     imageLogo: {
-        resizeMode: 'contain',
+        contentFit: 'cover',
         width: 250,
-        height: '100%',
+        height: 70,
         alignSelf: 'center'
     },
     titleText: {
         color: '#FFA3AC',
         textAlign: 'center',
         padding: 20,
-        fontSize: 24,
-        marginVertical: 20,
+        fontSize: 28,
+        marginVertical: 10,
         fontWeight: 'bold',
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
@@ -141,29 +134,29 @@ const styles = StyleSheet.create({
     },
     validInput: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: "FF707E",
         borderRadius: 5,
-        fontSize: 12,
+        fontSize: 14,
         marginHorizontal: 20,
     },
     inputText: {
         color: '#ff707e',
-        fontSize: 12,
+        fontSize: 14,
         marginHorizontal: 20,
         marginTop: 10,
     },
     buttonBox: {
-        marginHorizontal: 20,
+        marginHorizontal: 10,
         display: 'flex'
     },
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
+        padding: 15,
         marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
+        marginVertical: 20,
+        borderRadius: 15,
     },
     buttonText: {
         textAlign: 'center',
@@ -172,10 +165,10 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         backgroundColor: '#BFBFC1',
-        padding: 10,
+        padding: 15,
         marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
+        marginVertical: 20,
+        borderRadius: 15,
     },
     signinText: {
         textAlign: 'center',

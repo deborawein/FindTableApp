@@ -1,7 +1,8 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
-import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Image } from 'expo-image';
+
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
@@ -35,6 +36,7 @@ export function UpdateScreen(props) {
 
         <SafeAreaView style={styles.page}>
             <ScrollView>
+            <Image source={image} style={styles.imageRestaurant} />
                 <Text style={styles.restName}>{name}</Text>
                 <View style={styles.row}>
                     <View style={styles.leftBox}>
@@ -54,12 +56,14 @@ export function UpdateScreen(props) {
                         />
                     </View>
                 </View>
+                <View style={styles.rowLong}>
                 <Text style={styles.inputText}>Booking Time</Text>
                 <TextInput
                     style={styles.input}
                     value={timeUp}
                     onChangeText={(val) => setTimeUp(val)}
                 />
+                </View>
                 <Text style={styles.contact}>Contact Info</Text>
                 <View style={styles.row}>
                     <View style={styles.leftBox}>
@@ -79,12 +83,14 @@ export function UpdateScreen(props) {
                         />
                     </View>
                 </View>
+                <View style={styles.rowLong}>
                 <Text style={styles.inputText}>Phone number</Text>
                 <TextInput
                     style={styles.input}
                     value={phoneUp}
                     onChangeText={(val) => setPhoneUp(val)}
                 />
+                </View>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -111,7 +117,7 @@ export function UpdateScreen(props) {
                                     onPress={() => [
                                         setModalVisible(!modalVisible),
                                         updateReservation(),
-                                        navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
+                                        navigation.reset({ index: 0, routes: [{ name: 'BookingsStack' }] })
                                     ]}
                                 >
                                     <Text style={styles.buttonText}>YES</Text>
@@ -135,36 +141,43 @@ export function UpdateScreen(props) {
 
 const styles = StyleSheet.create({
     page: {
-        marginHorizontal: 20,
+        marginHorizontal: 0,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingVertical: 20
     },
     row: {
         display: 'flex',
         flexDirection: 'row',
-        paddingVertical: 20,
+        paddingVertical: 10,
+        marginHorizontal: 10,
+
+    },
+    rowLong: {
+        display: 'flex',
+        flexDirection: 'column',
+        paddingVertical: 10,
+        marginHorizontal: 10,
     },
     imageRestaurant: {
-        resizeMode: 'contain',
-        width: '100%',
-        flexDirection: 'column',
+        contentFit: 'cover',
+        width: "100%",
+        height: 200,
     },
     restName: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 24,
         flexDirection: 'column',
-    },
-    restDesc: {
-        fontSize: 12,
-        flexDirection: 'column',
+        marginHorizontal: 10,
+        paddingVertical: 10,
     },
     contact: {
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 18,
         flexDirection: 'column',
         paddingTop: 30,
+        marginHorizontal: 10,
+
     },
     leftBox: {
         flex: 1,
@@ -176,23 +189,23 @@ const styles = StyleSheet.create({
     },
     inputText: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 14,
         flexDirection: 'column',
         display: 'flex',
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
-        fontSize: 12,
+        fontSize: 14,
         flex: 1,
     },
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
-        borderRadius: 10,
+        padding: 15,
+        borderRadius: 15,
         marginTop: 20,
         marginHorizontal: 20
     },

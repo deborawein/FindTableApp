@@ -1,43 +1,44 @@
 
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Image } from 'expo-image';
 
 export function LoginScreen(props) {
-  const imageWelcome = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Fwelcome.png?alt=media&token=95f93ce5-989b-4dd6-a805-b8624a1711f3";
-  const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
-
+  const imageWelcome = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Fwelcome.png?alt=media&token=95f93ce5-989b-4dd6-a805-b8624a1711f3"
+  const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753"
+    
   const navigation = useNavigation();
 
   return (
-    
-      <SafeAreaView style={styles.page}>
-        <View style={styles.imageContainer}>
-          <Image source={imageWelcome} style={styles.imageWelcome} />
-        </View>
-        <View style={styles.mainContainer}>
-          <View style={styles.buttonBox}>
 
-            <Text style={styles.welcomeText}>Let's have dinner?!</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
-              <Text style={styles.buttonText}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
-              <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.logoContainer}>
-            <Image source={logo} style={styles.imageLogo} />
-          </View>
+    <SafeAreaView style={styles.page}>
+      <View style={styles.imageContainer}>
+        <Image source={imageWelcome} style={styles.imageWelcome} />
+      </View>
+      <View style={styles.mainContainer}>
+        <View style={styles.buttonBox}>
+
+          <Text style={styles.welcomeText}>Let's have dinner?!</Text>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign In')}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
+            <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+          </TouchableOpacity>
         </View>
-      </SafeAreaView>
-   
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.imageLogo} />
+        </View>
+      </View>
+    </SafeAreaView>
+
   )
 }
 
 const styles = StyleSheet.create({
   page: {
     backgroundColor: '#FFFFFF',
-    height: '100%',
+    flex: 1,
   },
   imageContainer: {
     height: '40%',
@@ -50,17 +51,17 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 40,
   },
   buttonBox: {
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     display: 'flex'
   },
   logoContainer: {
-    paddingVertical: 60,
+    paddingVertical: 20,
     backgroundColor: '#00043C',
     justifyContent: 'center'
   },
 
   imageWelcome: {
-    resizeMode: 'contain',
+    contentFit: 'cover',
     width: '100%',
     height: '100%',
   },
@@ -74,10 +75,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#FF707E',
-    padding: 10,
+    padding: 15,
     marginHorizontal: 20,
-    marginVertical: 15,
-    borderRadius: 10,
+    marginVertical: 20,
+    borderRadius: 15,
   },
   buttonText: {
     textAlign: 'center',
@@ -85,9 +86,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageLogo: {
-    resizeMode: 'contain',
+    contentFit: 'cover',
     height: 50,
-    width: '100%',
+    width: 200,
     alignSelf: 'center'
   },
 });

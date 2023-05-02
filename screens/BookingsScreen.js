@@ -1,4 +1,4 @@
-import { View, FlatList, SafeAreaView, ScrollView } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 //context
@@ -18,11 +18,9 @@ export function BookingsScreen(props) {
     navigation.navigate("Booking Detail", data)
   }
   return (
-    <ScrollView>
-      <SafeAreaView>
-        <View style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
           <Header />
-          <FlatList style={{ backgroundColor: "#FFE7E9" }} data={reserveData}
+          <FlatList data={reserveData}
             renderItem={({ item }) => (
               <BookingListItem
                 id={item.id}
@@ -40,9 +38,7 @@ export function BookingsScreen(props) {
             keyExtractor={item => item.id}
             ItemSeparatorComponent={ListItemSeparator}
           />
-        </View>
       </SafeAreaView>
-    </ScrollView>
   )
 }
 

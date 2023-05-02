@@ -1,7 +1,7 @@
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import { SignOutButton } from './SignOutButton';
 
-const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
+const logo = {uri: "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753"}
   
 
 export function Header(props) {
@@ -16,8 +16,7 @@ export function Header(props) {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#00043C',
-    height: 65,
-    //display: 'flex',
+    height: 70,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: "center",
@@ -28,12 +27,10 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: '60%',
     width: '90%',
-    //flex: 2,
     alignSelf: 'center',
 
   },
   signOutButton: {
-    //flex: 1,
     width: '10%'
  
     }

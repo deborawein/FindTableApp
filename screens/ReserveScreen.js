@@ -1,7 +1,9 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal, Alert, Pressable, SafeAreaView } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
+import { Image } from 'expo-image';
+
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
@@ -34,8 +36,8 @@ export function ReserveScreen(props) {
     }
 
     return (
-        <ScrollView>
-            <SafeAreaView style={styles.page}>
+        <SafeAreaView style={styles.page}>
+            <ScrollView>
                 <Image source={image} style={styles.imageRestaurant} />
                 <Text style={styles.restName}>{name}</Text>
                 <Text style={styles.restDesc}>{type} • {suburb}, {state}</Text>
@@ -57,12 +59,14 @@ export function ReserveScreen(props) {
                         />
                     </View>
                 </View>
-                <Text style={styles.inputText}>Booking Time</Text>
-                <TextInput
-                    style={styles.input}
-                    value={time}
-                    onChangeText={(val) => setTime(val)}
-                />
+                <View style={styles.rowLong}>
+                    <Text style={styles.inputText}>Booking Time</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={time}
+                        onChangeText={(val) => setTime(val)}
+                    />
+                </View>
                 <Text style={styles.contact}>Contact Info</Text>
                 <View style={styles.row}>
                     <View style={styles.leftBox}>
@@ -82,18 +86,19 @@ export function ReserveScreen(props) {
                         />
                     </View>
                 </View>
-                <Text style={styles.inputText}>Phone number</Text>
-                <TextInput
-                    style={styles.input}
-                    value={phone}
-                    onChangeText={(val) => setPhone(val)}
-                />
+                <View style={styles.rowLong}>
+                    <Text style={styles.inputText}>Phone number</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={phone}
+                        onChangeText={(val) => setPhone(val)}
+                    />
+                </View>
                 <Modal
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
                         setModalVisible(!modalVisible);
                     }}>
                     <View style={styles.centeredView}>
@@ -103,7 +108,7 @@ export function ReserveScreen(props) {
                                 style={styles.button}
                                 onPress={() => [
                                     setModalVisible(!modalVisible),
-                                    navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
+                                    navigation.navigate("BookingsStack")
                                 ]}
                             >
                                 <Text style={styles.buttonText}>OK</Text>
@@ -119,15 +124,13 @@ export function ReserveScreen(props) {
                 >
                     <Text style={styles.buttonText}>RESERVE</Text>
                 </TouchableOpacity>
-            </SafeAreaView>
             </ScrollView>
-
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     page: {
-        marginHorizontal: 20,
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
@@ -136,28 +139,42 @@ const styles = StyleSheet.create({
     row: {
         display: 'flex',
         flexDirection: 'row',
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+    },
+    rowLong: {
+        display: 'flex',
+        flexDirection: 'column',
         paddingVertical: 20,
+        paddingHorizontal: 10,
     },
     imageRestaurant: {
-        resizeMode: 'cover',
+        contentFit: 'cover',
         width: "100%",
         height: 200,
     },
     restName: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 24,
         flexDirection: 'column',
-        paddingTop: 10
+        paddingTop: 10,
+        paddingHorizontal: 10,
+
     },
     restDesc: {
-        fontSize: 12,
+        fontSize: 14,
         flexDirection: 'column',
+        paddingHorizontal: 10,
+        paddingBottom: 20,
+
     },
     contact: {
         fontWeight: 'bold',
         fontSize: 14,
         flexDirection: 'column',
-        paddingTop: 30,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+
     },
     leftBox: {
         flex: 1,
@@ -169,25 +186,25 @@ const styles = StyleSheet.create({
     },
     inputText: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 14,
         flexDirection: 'column',
         display: 'flex',
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
-        fontSize: 12,
+        fontSize: 14,
         flex: 1,
     },
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
+        padding: 15,
         marginHorizontal: 20,
         marginVertical: 15,
-        borderRadius: 10,
+        borderRadius: 15,
     },
     buttonText: {
         textAlign: 'center',

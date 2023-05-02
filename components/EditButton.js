@@ -1,6 +1,6 @@
-import { View, Text, Pressable, StyleSheet } from "react-native-web"
+import { View, Text, Pressable, StyleSheet } from "react-native"
 
-export function InfoListItem(props) {
+export function EditButton(props) {
     const data = {
         id: props.id,
         name: props.name,
@@ -24,10 +24,11 @@ export function InfoListItem(props) {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
-        borderRadius: 10,
-        marginTop: 20,
+        padding: 15,
+        borderRadius: 15,
+        marginTop: 40,
         marginHorizontal: 20
+        
     }, 
     buttonText: {
         textAlign: 'center',

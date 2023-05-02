@@ -1,5 +1,5 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native"
-
+import { View, Text, Pressable, StyleSheet } from "react-native"
+import { Image } from 'expo-image';
 
 export function RestaurantListItem(props) {
     const data = {
@@ -23,20 +23,20 @@ export function RestaurantListItem(props) {
 }
 const styles = StyleSheet.create({
     itemList: {
-        padding: 20,
+        padding: 10,
     },
     imageRestaurant: {
-        resizeMode: 'cover',
+        contentFit: 'cover',
         width: "100%",
-        height: 200,
+        height: 150,
     },
     itemName: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 24,
         paddingTop: 10,
     },
     itemDescription: {
-        fontSize: 11,
+        fontSize: 14,
     },
 
 })

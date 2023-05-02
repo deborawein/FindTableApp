@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useState } from 'react';
 //components
@@ -39,9 +39,7 @@ export function HomeScreen(props) {
     }
 
     return (
-        <ScrollView>
-            <SafeAreaView>
-                <View style={{ flex: 1 }}>
+                <SafeAreaView style={{ flex: 1 }}>
                     <Header />
                     <FlatList data={filterItems(restData, search)}
                         renderItem={renderItem}
@@ -65,9 +63,7 @@ export function HomeScreen(props) {
                             </View>
                         }
                     />
-                </View>
-            </SafeAreaView>
-        </ScrollView>
+                </SafeAreaView>
     )
 }
 
@@ -75,21 +71,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFA3AC',
     },
-    button: {
-        backgroundColor: '#FF707E',
-        padding: 10,
-        marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-    },
     containerSearch: {
         backgroundColor: '#FFA3AC',
-        paddingVertical: 10,
+        paddingVertical: 15,
     },
     searchSection: {
         flex: 1,
@@ -100,19 +84,16 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     searchIcon: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     },
     input: {
         flex: 1,
         backgroundColor: '#ffffff',
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
-        fontSize: 12,
+        fontSize: 14,
         marginHorizontal: 5,
     },
 })

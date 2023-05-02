@@ -27,14 +27,8 @@ export function HomeTab(props) {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "#FFA3AC",
-        tabBarInactiveTintColor: "#00043C",
         tabBarStyle: {
           backgroundColor: '#00043C',
-          height: 90
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          margin: 5,
         },
       }}>
       <Tab.Screen

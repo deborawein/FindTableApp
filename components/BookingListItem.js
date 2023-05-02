@@ -1,4 +1,6 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native-web"
+import { View, Text, Pressable, StyleSheet } from "react-native"
+import { Image } from 'expo-image';
+
 //incons
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -41,7 +43,7 @@ export function BookingListItem(props) {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
         marginTop: 20,
     },
     row: {
@@ -49,13 +51,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginVertical: 10,
 
-    },
-    button: {
-        backgroundColor: '#FF707E',
-        padding: 10,
-        marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
     },
     buttonText: {
         textAlign: 'center',
@@ -66,11 +61,11 @@ const styles = StyleSheet.create({
     imageRestaurant: {
         resizeMode: 'cover',
         width: '100%',
-        height: 200
+        height: 150
     },
     itemName: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 24,
         paddingTop: 10,
     },
     separatorItem: {
@@ -82,17 +77,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     itemRight: {
-        fontSize: 12,
+        fontSize: 14,
         textAlign: 'right'
     },
     rowLeft: {
         flex: 1,
         justifyContent: 'flex-start',
-        textAlign: 'left'
+        textAlign: 'left',
+        fontSize: 14,
     },
 
-    itemLeft: {
-        fontSize: 12,
-        textAlign: 'left'
-    },
 })

@@ -1,20 +1,25 @@
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Modal, Pressable, ScrollView, SafeAreaView } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { useContext, useState } from 'react'
+import { Image } from 'expo-image';
 //components
-import { InfoListItem } from '../components/InfoListItem';
+import { EditButton } from '../components/EditButton';
 //context
 import { AuthContext } from "../context/AuthContext";
 import { DBContext } from '../context/DBContext';
+import { ReservationContext } from '../context/ReservationContext';
 //incons
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-
+//firebase
 import { deleteDoc, doc } from 'firebase/firestore'
 
 export function InfoScreen(props) {
     const authStatus = useContext(AuthContext)
     const DB = useContext(DBContext)
+    const reserveData = useContext(ReservationContext)
+
+    
     const routeInfo = useRoute();
     const navigation = useNavigation()
     const [modalVisible, setModalVisible] = useState(false);
@@ -33,6 +38,7 @@ export function InfoScreen(props) {
     return (
         <SafeAreaView style={styles.page}>
             <ScrollView>
+            <Image source={image} style={styles.imageRestaurant} />
                 <View style={styles.titleBox}>
                     <Text style={styles.title}>Reservation</Text>
                     <Text style={styles.restaurant}>{name}</Text>
@@ -46,7 +52,7 @@ export function InfoScreen(props) {
                     <Text style={styles.contactText}>{firstname} {lastname}</Text>
                     <Text style={styles.contactText}>{phone}</Text>
                 </View>
-                <InfoListItem
+                <EditButton
                     id={id}
                     name={name}
                     date={date}
@@ -84,7 +90,7 @@ export function InfoScreen(props) {
                                     onPress={() => [
                                         setModalVisible(!modalVisible),
                                         cancelReservation(),
-                                        navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
+                                        navigation.reset({ index: 0, routes: [{ name: 'BookingsStack' }] })
                                     ]}
                                 >
                                     <Text style={styles.buttonText}>YES</Text>
@@ -98,55 +104,62 @@ export function InfoScreen(props) {
                 ]}>
                     <Text style={styles.buttonText} >CANCEL BOOKING</Text>
                 </TouchableOpacity>
-            </ScrollView>
+                </ScrollView>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     page: {
-        marginHorizontal: 20,
+        
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingVertical: 20
     },
     titleBox: {
-        flex: 1,
-        padding: 10,
+        marginHorizontal: 10,
+        padding: 20,
     },
     title: {
-        fontSize: 20,
+        fontSize: 28,
         textAlign: 'center',
         fontWeight: 'bold',
     },
     restaurant: {
-        fontSize: 12,
+        fontSize: 16,
         textAlign: 'center',
+    },
+    imageRestaurant: {
+        contentFit: 'cover',
+        width: "100%",
+        height: 200,
     },
     box: {
         paddingTop: 10,
+        marginHorizontal: 10,
+
     },
     bookingText: {
-        fontSize: 12,
+        fontSize: 14,
         paddingVertical: 5,
         fontWeight: 'bold'
     },
     contactTitle: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         paddingVertical: 10,
     },
     contactText: {
-        fontSize: 12,
+        fontSize: 14,
+        
     },
     buttonBox: {
-        padding: 20,
+        padding: 10,
     },
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
-        borderRadius: 10,
+        padding: 15,
+        borderRadius: 15,
         marginTop: 20,
         marginHorizontal: 20
     },

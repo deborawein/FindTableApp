@@ -1,13 +1,17 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import { useEffect, useState, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
+import { Image } from 'expo-image';
+
 //context
 import { AuthContext } from "../context/AuthContext";
 //icon
 import { AntDesign } from '@expo/vector-icons';
 
+
+
 export function SigninScreen(props) {
-    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753";
+    const logo = "https://firebasestorage.googleapis.com/v0/b/findtableapp-1feb9.appspot.com/o/assets%2Flogo.png?alt=media&token=4f9f121e-b3f3-4956-b791-cce1bb5cf753"
 
     const [email, setEmail] = useState("")
     const [validEmail, setValidEmail] = useState(false)
@@ -47,56 +51,52 @@ export function SigninScreen(props) {
 
     useEffect(() => {
         if (authStatus) {
-            // navigation.navigate('HomeTab')
             navigation.reset({ index: 0, routes: [{ name: 'HomeTab' }] })
         }
     }, [authStatus])
 
     return (
         <SafeAreaView style={styles.page}>
-            <ScrollView>
-                <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
-                    <AntDesign name="closecircle" size={24} color="#FF707E" />
-                </TouchableOpacity>
-                <View style={styles.containerImage}>
-                    <Image source={logo} style={styles.imageLogo} />
-                </View>
-                <View style={styles.containerLogin}>
-                    <Text style={styles.titleText}>Login Now</Text>
-                    <Text style={styles.inputText}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="you@domain.com"
-                        value={email}
-                        onChangeText={(emailText) => setEmail(emailText)}
-                    />
-                    <Text style={styles.inputText}>Password</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="minimum 8 characters"
-                        value={password}
-                        onChangeText={(pwText) => setPassword(pwText)}
-                        secureTextEntry={true}
-                    />
-                    <View style={styles.buttonBox}>
-                        <TouchableOpacity
-                            style={(validForm) ? styles.button : styles.buttonDisabled}
-                            disabled={(validForm) ? false : true}
-                            onPress={() => props.handler(email, password)}
+            <TouchableOpacity style={styles.xmark} onPress={() => navigation.popToTop()}>
+                <AntDesign name="closecircle" size={24} color="#FF707E" />
+            </TouchableOpacity>
+            <View style={styles.containerImage}>
+                <Image source={logo} style={styles.imageLogo} />
+            </View>
+            <View>
+                <Text style={styles.titleText}>Login Now</Text>
+                <Text style={styles.inputText}>Email</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="you@domain.com"
+                    value={email}
+                    onChangeText={(emailText) => setEmail(emailText)}
+                />
+                <Text style={styles.inputText}>Password</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="minimum 8 characters"
+                    value={password}
+                    onChangeText={(pwText) => setPassword(pwText)}
+                    secureTextEntry={true}
+                />
+                <View style={styles.buttonBox}>
+                    <TouchableOpacity
+                        style={(validForm) ? styles.button : styles.buttonDisabled}
+                        disabled={(validForm) ? false : true}
+                        onPress={() => props.handler(email, password)}
+                    >
+                        <Text style={styles.buttonText}>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                            onPress={() => navigation.navigate('Sign Up')}
                         >
-                            <Text style={styles.buttonText}>LOGIN</Text>
+                            <Text style={styles.signinText}>
+                                Don't have an account? Register here.</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.containerSignup}
-                            onPress={() => navigation.navigate('Sign Up')}>
-                            <Text style={styles.signupText}>
-                                Don't have an account? Sign up here.
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+            </View>
+        </SafeAreaView >
     )
 }
 
@@ -106,32 +106,26 @@ const styles = StyleSheet.create({
         backgroundColor: '#00043C',
     },
     containerImage: {
-        flex: 1,
+        paddingVertical: 50,
         justifyContent: 'center'
     },
-    containerLogin: {
-        flex: 2,
-    },
-    containerSignup: {
-        flex: 1,
-    },
     imageLogo: {
-        resizeMode: 'contain',
+        contentFit: 'cover',
         width: 250,
-        height: '100%',
+        height: 70,
         alignSelf: 'center'
     },
     titleText: {
         color: '#FFA3AC',
         textAlign: 'center',
         padding: 20,
-        fontSize: 24,
+        fontSize: 28,
         marginVertical: 20,
         fontWeight: 'bold',
     },
     input: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#BFBFC1',
         borderRadius: 5,
@@ -140,29 +134,29 @@ const styles = StyleSheet.create({
     },
     validInput: {
         backgroundColor: '#ffffff',
-        padding: 10,
+        padding: 15,
         borderWidth: 1,
         borderColor: "FF707E",
         borderRadius: 5,
-        fontSize: 12,
+        fontSize: 14,
         marginHorizontal: 20,
     },
     inputText: {
         color: '#ff707e',
-        fontSize: 12,
+        fontSize: 14,
         marginHorizontal: 20,
         marginTop: 10,
     },
     buttonBox: {
-        marginHorizontal: 20,
+        marginHorizontal: 10,
         display: 'flex'
     },
     button: {
         backgroundColor: '#FF707E',
-        padding: 10,
+        padding: 15,
         marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
+        marginVertical: 20,
+        borderRadius: 15,
     },
     buttonText: {
         textAlign: 'center',
@@ -171,12 +165,12 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         backgroundColor: '#BFBFC1',
-        padding: 10,
+        padding: 15,
         marginHorizontal: 20,
-        marginVertical: 15,
-        borderRadius: 10,
+        marginVertical: 20,
+        borderRadius: 15,
     },
-    signupText: {
+    signinText: {
         textAlign: 'center',
         color: '#FF707E',
         marginVertical: 10,
